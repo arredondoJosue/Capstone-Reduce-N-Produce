@@ -1,0 +1,25 @@
+@use '../App.scss';
+
+.wc-container{
+    display: grid; 
+				
+   grid-template: 1fr 1fr / 1fr 1fr;
+   
+   gap: 10px;
+   height: 100%;
+
+   .wc-container-top{
+       grid-row: 1 / 2;
+       grid-column: 1 / 3;
+   }
+
+    .wc-container-left{
+         grid-row: 2 / 3;
+         grid-column: 1 / 2;
+    }
+
+    .wc-container-right{
+         grid-row: 2 / 3;
+         grid-column: 2 / 3;
+    }
+}

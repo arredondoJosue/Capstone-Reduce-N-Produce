@@ -1,0 +1,13 @@
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #eeeff6;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #eeeff6;
+}
