@@ -1,5 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { getAuth, signOut } from "firebase/auth";
+// import { useAuth } from "./Hooks/hooks";
+import firebaseConfig from "../Hooks/firebase";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -65,8 +72,28 @@ export default function Navbar() {
       <nav className="navbar logout">
         <ul className="nav-list">
           <li>
-            <span className="material-icons" onClick={() => navigate("/login")}>
-              <Link to="/logout">power_settings_new</Link>
+            <span
+              className="material-icons"
+              // onClick={() =>
+              //   signOut(auth)
+              //     .then(() => {
+              //       console.log("successfully logged out");
+              //       navigate("/");
+              //     })
+              //     .catch((err) => console.log("DID NOT LOGOUT ", err))
+              // }
+              onClick={async () => {
+                console.log(auth);
+                try {
+                  await signOut(auth);
+                  console.log("successfully logged out", auth);
+                  navigate("/");
+                } catch (err) {
+                  console.log("DID NOT LOGOUT ", err);
+                }
+              }}
+            >
+              <Link to="/">power_settings_new</Link>
             </span>
           </li>
         </ul>

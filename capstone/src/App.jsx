@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+
 import useAxios from "./Hooks/hooks";
 
 import "./App.scss";
@@ -26,20 +20,6 @@ import EditPage from "./components/Pages/EditPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: import.meta.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: import.meta.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.REACT_APP_FIREBASE_APP_ID,
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// const auth = getAuth(app);
-
 function App() {
   // const data = useAxios("test");
   // console.log(data);
@@ -55,7 +35,7 @@ function App() {
         <div>{data}</div>
         <div>{seedData}</div> */}
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route index element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile/*" element={<Profile />} />
           <Route path="/org" element={<Org />} />
@@ -64,7 +44,7 @@ function App() {
           <Route path="/ward-council" element={<WardCouncil />} />
           <Route path="/messaging" element={<Messaging />} />
           <Route path="/edit-page" element={<EditPage />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/register" element={<Register />} />
         </Routes>
       </header>

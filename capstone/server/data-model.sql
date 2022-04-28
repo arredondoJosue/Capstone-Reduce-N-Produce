@@ -1,0 +1,164 @@
+CREATE TABLE users (
+  user_id uuid DEFAULT gen_random_uuid(),
+  first_name varchar(75),
+  last_name varchar(75),
+  user_name varchar(150),
+  user_email varchar(120),
+  user_pwd varchar(255),
+  isAdmin BOOLEAN DEFAULT FALSE,
+  user_calling varchar(75) REFERENCES callings(calling_name),
+  calling_id INT NOT NULL REFERENCES callings(calling_id),
+  ward_id INT NOT NULL REFERENCES ward(ward_id),
+  user_initials varchar(4),
+  user_avatar_color varchar(75),
+  user_created_at timestamp
+);
+
+CREATE TABLE ward (
+  ward_id uuid DEFAULT gen_random_uuid(),
+  ward_name varchar(75)
+);
+
+CREATE Table agenda (
+  agenda_id SERIAL PRIMARY KEY,
+  agenda_text varchar(10000),
+  agenda_updated_at timestamp
+);
+
+CREATE Table messages (
+  msg_id uuid DEFAULT gen_random_uuid(),
+  msg_created_at timestamp,
+  msg_text varchar(5000), 
+  msg_author varchar(75) NOT NULL REFERENCES users(user_id),
+  msg_recipient varchar(75) NOT NULL REFERENCES users(user_id)
+);
+
+CREATE TABLE posts (
+  post_id SERIAL PRIMARY KEY,
+  posting_date timestamp,
+  post_img BYTEA,
+  post_txt varchar(5000),
+  org_id INT NOT NULL REFERENCES org(org_id),
+  org_name varchar(75) NOT NULL REFERENCES org(org_name),
+  post_author varchar(75) NOT NULL REFERENCES users(user_name),
+  post_author_id INT NOT NULL REFERENCES users(user_id)
+);
+
+CREATE TABLE tasks (
+  task_id SERIAL PRIMARY KEY,
+  task_created_at timestamp,
+  task_due DATE NOT NULL DEFAULT (NOW() + interval '1 day'),
+  task_isComplete BOOLEAN DEFAULT FALSE,
+  org_id INT NOT NULL REFERENCES org(org_id)
+);
+
+CREATE TABLE callings (
+  calling_id SERIAL PRIMARY KEY,
+  calling_name varchar(75) DEFAULT 'Child of God'
+);
+
+CREATE TABLE comments (
+  comment_id uuid DEFAULT gen_random_uuid(),
+  comment_text varchar(500),
+  comment_timestamp timestamp,
+  comment_author varchar(75) NOT NULL REFERENCES users(user_name)
+);
+
+CREATE TABLE org (
+  org_id uuid DEFAULT gen_random_uuid(),
+  org_name varchar(75),
+  org_callings varchar (75) NOT NULL REFERENCES callings(calling_name),
+  org_callings_id INT NOT NULL REFERENCES callings(calling_id),
+  agenda_id INT NOT NULL REFERENCES agenda(agenda_id)
+);
+
+CREATE TABLE notes (
+  note_id uuid DEFAULT gen_random_uuid(),
+  note_title varchar(75),
+  note_text varchar(5000),
+  note_timestamp timestamp,
+  note_author varchar(75) NOT NULL REFERENCES users(user_name)
+);
+
+---- Cleaned up Seed ---
+
+CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  first_name varchar(75),
+  last_name varchar(75),
+  user_name varchar(150),
+  user_email varchar(120),
+  isAdmin BOOLEAN DEFAULT FALSE,
+  user_calling INT REFERENCES callings(calling_id),
+  user_ward INT REFERENCES ward(ward_id),
+  user_initials varchar(3),
+  user_avatar_color varchar(75),
+  user_created_at timestamp
+);
+
+CREATE TABLE ward (
+  ward_id SERIAL PRIMARY KEY,
+  ward_name varchar(75)
+);
+
+CREATE Table agenda (
+  agenda_id SERIAL PRIMARY KEY,
+  agenda_text varchar(10000),
+  agenda_updated_at timestamp
+);
+
+CREATE Table messages (
+  msg_id SERIAL PRIMARY KEY,
+  msg_created_at timestamp,
+  msg_text varchar(5000), 
+  msg_author INT REFERENCES users(user_id),
+  msg_recipient INT REFERENCES users(user_id)
+);
+
+CREATE TABLE posts (
+  post_id SERIAL PRIMARY KEY,
+  posting_date timestamp,
+  post_img BYTEA,
+  post_txt varchar(5000),
+  org_id INT REFERENCES org(org_id),
+  post_author_id INT REFERENCES users(user_id)
+);
+
+CREATE TABLE tasks (
+  task_id SERIAL PRIMARY KEY,
+  task_description varchar(5000),
+  task_created_at timestamp,
+  task_due DATE DEFAULT (NOW() + interval '1 day'),
+  task_isComplete BOOLEAN DEFAULT FALSE,
+  task_org_id INT REFERENCES org(org_id),
+  task_author_id INT REFERENCES users(user_id),
+  task_assingee_id INT REFERENCES users(user_id)
+);
+
+CREATE TABLE callings (
+  calling_id SERIAL PRIMARY KEY,
+  calling_name varchar(75) DEFAULT 'General'
+);
+
+CREATE TABLE comments (
+  comment_id SERIAL PRIMARY KEY,
+  comment_text varchar(500),
+  comment_timestamp timestamp,
+  comment_author INT REFERENCES users(user_id)
+);
+
+CREATE TABLE org (
+  org_id SERIAL PRIMARY KEY,
+  org_name varchar(75),
+  org_callings_id INT REFERENCES callings(calling_id),
+  org_agenda_id INT REFERENCES agenda(agenda_id)
+);
+
+CREATE TABLE notes (
+  note_id SERIAL PRIMARY KEY,
+  note_title varchar(75),
+  note_text varchar(5000),
+  note_timestamp timestamp,
+  note_author_id INT REFERENCES users(user_id),
+  note_shared_with INT REFERENCES users(user_id)
+);
