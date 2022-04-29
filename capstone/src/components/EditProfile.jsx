@@ -1,24 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../styles/Profile.scss";
 import { useNavigate, Routes, Route } from "react-router-dom";
 
 export default function EditProfile() {
   const navigate = useNavigate();
+  let [user, setUser] = useState([]);
+  let [state, setState] = useState(false);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/v1/user").then((res) => {
+      setUser(res.data[0]);
+      console.log(user[0]);
+      setState(true);
+    });
+  }, []);
   return (
     <>
       <header className="profile-container">
         <div className="profile-container-section1">
-          <span className="profile-avatar">JA</span>
+          <span className="profile-avatar">
+            {state ? user.user_initials : ""}
+          </span>
         </div>
         <div className="profile-container-section2">
           <div className="profile-name-container">
             <span className="profile-name">
-              Name: <span className="profile-name-text">user.name</span>
+              Name:{" "}
+              <span className="profile-name-text">
+                {state ? user.user_name : "Loading..."}
+              </span>
             </span>
           </div>
           <div className="profile-name-container">
             <span className="profile-name">
-              Email: <span className="profile-name-text">user.email</span>
+              Email:{" "}
+              <span className="profile-name-text">
+                {state ? user.user_email : "Loading..."}
+              </span>
             </span>
           </div>
           <div className="profile-name-container">
@@ -29,19 +48,27 @@ export default function EditProfile() {
           </div>
           <div className="profile-name-container">
             <span className="profile-name">
-              Ward: <span className="profile-name-text">user.ward.name</span>
+              Ward:{" "}
+              <span className="profile-name-text">
+                {state ? user.user_ward : "Loading..."}
+              </span>
             </span>
           </div>
           <div className="profile-name-container">
             <span className="profile-name">
               Calling:{" "}
-              <span className="profile-name-text">user.calling.name</span>
+              <span className="profile-name-text">
+                {" "}
+                {state ? user.user_calling : "Loading..."}
+              </span>
             </span>
           </div>
           <div className="profile-name-container">
             <span className="profile-name">
               Organization:{" "}
-              <span className="profile-name-text">user.organization.name</span>
+              <span className="profile-name-text">
+                {state ? user.user_org : "Loading..."}
+              </span>
             </span>
           </div>
           <span className="profile-edit-button">

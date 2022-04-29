@@ -6,7 +6,11 @@ const cors = require("cors");
 const { connect, test, messages } = require("./controllers/controller");
 const { getTasks } = require("./controllers/tasksController");
 const { getUser } = require("./controllers/usersController");
-const { getNotes } = require("./controllers/notesController");
+const {
+  getNotes,
+  getAgenda,
+  updateAgenda,
+} = require("./controllers/notesController");
 const {
   getProposedCallings,
   getApprovalCallings,
@@ -31,6 +35,8 @@ app.get(baseURL + "/tasks", getTasks);
 app.get(baseURL + "/user", getUser);
 
 app.get(baseURL + "/notes", getNotes);
+app.get(baseURL + "/agenda", getAgenda);
+app.post(baseURL + "/agenda-update", updateAgenda);
 
 app.get(baseURL + "/proposed-callings", getProposedCallings);
 app.get(baseURL + "/proposed-callings/approval", getApprovalCallings);

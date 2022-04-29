@@ -24,7 +24,7 @@ module.exports = {
           "SELECT * FROM tasks"
         )
         .then((tasks) => {
-          console.log(tasks[0]);
+          // console.log(tasks[0]);
           res.status(200).send(tasks[0]);
         })
         .catch((error) => {

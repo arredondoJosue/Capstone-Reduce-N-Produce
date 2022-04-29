@@ -10,6 +10,8 @@
     "start": "vite start"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^34.0.0",
+    "@ckeditor/ckeditor5-react": "^5.0.0",
     "axios": "^0.26.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",

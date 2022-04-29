@@ -51,8 +51,10 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
   .main-nav{
     grid-row: 2 / 6;
      grid-column: 1 / 2;
+    padding-top: 100%;
+
   
-    padding-top: 40%;
+    // padding-top: 40%;
   }
   
   /*item-1*/
@@ -76,7 +78,8 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
   }
   
   .material-icons {
-    font-size: calc(10px + 2vmin);
+    // font-size: calc(10px + 2vmin);
+    font-size: 24px;
     color: $fourth-color;
     display: flex;
     cursor: pointer;
@@ -125,22 +128,26 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
   .nav-list{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    // width: 100%;
+    height: 80%;
     padding: 0px;
+    // padding-top: 50%;
+
+    ul > li {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      // justify-content: space-around;
+      // align-items: center;
+      // width: 100%;
+      // height: 100%;
   }
   
-  ul > li {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
+  }
+  
+  
 
 .dashboard-container{
   display: grid;

@@ -1,6 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
+import axios from "axios";
+
 import EditProfile from "./EditProfile";
 import ProfileInfo from "./ProfileInfo";
 import "../styles/Profile.scss";
@@ -8,6 +9,22 @@ import "../styles/Profile.scss";
 export default function Profile() {
   // const [edit, setEdit] = useState(false);
   const navigate = useNavigate();
+
+  // const newSubs = approval.map((calling) => {
+  //   if (calling.proposed_status === "New") {
+  //     return (
+  //       <KanbanCard
+  //         key={calling.proposed_id}
+  //         callingName={calling.proposed_calling}
+  //         name={calling.proposed_name}
+  //         release={calling.proposed_release_name}
+  //         due={calling.proposed_needed_date}
+  //         phase={calling.proposed_phase}
+  //         status={calling.proposed_status}
+  //       />
+  //     );
+  //   }
+  // });
 
   return (
     <div className="profile">

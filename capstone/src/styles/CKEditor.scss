@@ -1,0 +1,22 @@
+@use '../App.scss';
+
+.ck.ck-editor__main>.ck-editor__editable{
+    // background: #1d1b2e;
+    // background: #1d1b2e;
+    background: #1d1b2e;
+    // background: App.$fifth-color;
+}
+
+// .ck-reset_all:not(.ck-reset_all-excluded *), .ck.ck-reset_all{
+//     color: App.$fifth-color;
+// }
+
+.ck.ck-toolbar{
+    background: App.$secondary-color;
+}
+
+.ck-reset_all :not(.ck-reset_all-excluded *), .ck.ck-reset_all {
+    // color: App.$fourth-color;
+    color: #A288E3;
+
+}
