@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-
+// import "bootstrap/dist/css/bootstrap.min.css";
 import useAxios from "./Hooks/hooks";
 
 import "./App.scss";
@@ -19,12 +19,9 @@ import Messaging from "./components/Pages/Messaging";
 import EditPage from "./components/Pages/EditPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import NewTask from "./components/NewTask";
 
 function App() {
-  // const data = useAxios("test");
-  // console.log(data);
-  // const seedData = useAxios("seed");
-
   return (
     <div className="App">
       <Navbar />
@@ -46,6 +43,7 @@ function App() {
           <Route path="/edit-page" element={<EditPage />} />
           {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/register" element={<Register />} />
+          <Route path="/new-task" element={<NewTask />} />
         </Routes>
       </header>
     </div>

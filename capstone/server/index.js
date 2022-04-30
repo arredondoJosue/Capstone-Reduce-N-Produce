@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 
 const { connect, test, messages } = require("./controllers/controller");
-const { getTasks } = require("./controllers/tasksController");
+const { getTasks, completedTask } = require("./controllers/tasksController");
 const { getUser } = require("./controllers/usersController");
 const {
   getNotes,
@@ -30,7 +30,8 @@ app.get(baseURL, connect);
 app.get(baseURL + "/test", test);
 app.get(baseURL + "/messages", messages);
 
-app.get(baseURL + "/tasks", getTasks);
+app.get(baseURL + "/tasks/:user_id", getTasks);
+app.put(baseURL + "/tasks/completed_task/:user_id", completedTask);
 
 app.get(baseURL + "/user", getUser);
 

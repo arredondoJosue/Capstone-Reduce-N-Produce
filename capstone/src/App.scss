@@ -1,3 +1,4 @@
+@import "/Users/josuearredondo/Non-iCloud Items/DevMountain-course-files/Projects/Reduce-n-produce/capstone/node_modules/bootstrap/scss/bootstrap.scss";
 $primary-color: #1d1b2e;
 $secondary-color: #343142;
 $secondary-color-darker: #343142a8;
@@ -10,7 +11,6 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
 // HORIZONTAL background:-webkit-linear-gradient(0deg, #7754B2 0%, #343142 27%, #1D1B2E 86%);
 // VERTICAL: background:-webkit-linear-gradient(90deg, #7754B2 0%, #343142 27%, #1D1B2E 86%);
 
-
 .App {
     text-align: center;
     display: grid; 
@@ -21,27 +21,32 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
      height: 100%;
   }
   
-
+  // .navbar-container{
+  //   grid-row: 1 / 5;
+  //   grid-column: 1 / 2;
+  //   height: 100vh;
+  //   width: 100%;
+  // }
 
   .navbar{
     font-size: 3px;
     background-color: $secondary-color;
     // color:  $fourth-color;
     text-align: center;
-    // max-width: 100px;
-    
+    max-width: 100px;
+    // margin: 0 auto;
   }
   
   /*item-2*/
   .action-items{
     grid-row: 1 / 2;
      grid-column: 1 / 2;
-     border-bottom: 1px solid $fourth-color;
+     border-bottom: 1px solid $inactive-icon;
   }
   
   /*item-3*/
   .logout{
-    border-top: 1px solid $fourth-color;
+    border-top: 1px solid $inactive-icon;
     grid-row: 6 / 7;
     grid-column: 1 / 2;
     padding: 10px;
@@ -86,13 +91,27 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
     text-decoration: none;
   }
 
+  .addTask{
+    position: relative;
+  }
+
+  // .popover{}
+
+ .popover-basic {
+    overflow: auto;
+    position: absolute;
+  }
+
   .action:hover{
     color: $fifth-color;
   }
   
-  a {
+  //was 'a'
+  .action, .main-nav-icons, .nav-footer-icons {
     color: $fourth-color;
     text-decoration: none;
+    list-style: none;
+    -webkit-tap-highlight-color: transparent;
 
 
     // &:active::after{
@@ -112,18 +131,9 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
 
   }
   
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  button {
-    font-size: calc(10px + 2vmin);
-  }
+  // button {
+  //   font-size: calc(10px + 2vmin);
+  // }
   
   .nav-list{
     display: flex;
@@ -132,7 +142,7 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
     align-items: center;
     // width: 100%;
     height: 80%;
-    padding: 0px;
+    padding: 10px;
     // padding-top: 50%;
 
     ul > li {
@@ -144,9 +154,27 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
       // width: 100%;
       // height: 100%;
   }
+    .navbar-li-items{
+      list-style: none;
+      padding: initial;
+    }
   
   }
+
+
+  .popover-header{
+    background-color: #412474;
+    color: $fourth-color;
+    font-size: calc(10px + 2vmin);
+    // background-color: $secondary-color-darker;
+    // color: $fourth-color;
+  }
   
+  .popover-body{
+    background-color: rgba(119, 84, 178, 0.9);
+    color: $fourth-color;
+    // font-size: calc(10px + 2vmin);
+  }
   
 
 .dashboard-container{

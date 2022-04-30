@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function NewTask() {
+export default function TaskInfo() {
   return (
     <div>
       <form>
@@ -10,14 +10,9 @@ export default function NewTask() {
         </label>
         <label>
           Due Date:
-          <input
-            type="date"
-            name="taskDue"
-            defaultValue={new Date(Date.now() + 1)}
-          />
+          <input type="date" name="taskDue" />
         </label>
         <label>
-          Assigned to(optional):
           <select name="taskAssignee">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -25,6 +20,9 @@ export default function NewTask() {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
+        </label>
+        <label>
+          <input type="checkbox" name="isCompleted" />
         </label>
         <input type="submit" value="Submit" />
       </form>
