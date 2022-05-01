@@ -1,0 +1,210 @@
+@use '../App.scss';
+
+//   .addTask{
+//     position: relative;
+//   }
+
+//   .popover{
+//     // position: absolute;
+//     // top: 0;
+//     // left:300px;
+//     // background-color: App.$primary-color;
+//     border-radius: 5px;
+//     padding: 3px;
+//     // box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+//     z-index: 1;
+//   }
+
+  #popover-basic {
+    position: absolute !important;
+    inset: 10px auto auto 65px !important;
+    transform: translate3d(5px, 64.5px, 0px) !important; 
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: rgb(118, 84, 178);
+    // box-shadow: 5px 5px 0px 0px App.$secondary-color-darker;
+  }
+
+  .popover-header{
+    background-color: #412474;
+    color: App.$fourth-color;
+    font-size: calc(10px + 2vmin);
+    margin-bottom: 0px;
+    margin-top: 0px;
+    // background-color: $secondary-color-darker;
+    // coloApp.r: $fourth-color;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    // width: 100%;
+    // height: 30px;
+    text-indent: 5px;
+
+  }
+  
+  .popover-body{
+    background-color: rgb(118, 84, 178);
+    color: App.$fourth-color;
+    // border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    // display: none;
+    margin-bottom: 5px;
+
+    // font-size: calc(10px + 2vmin);
+  }
+
+.new-note{
+    // background-color: #f5f5f5;
+    background-color: rgb(118, 84, 178);
+    border-radius: 5px;
+    // padding: 10px;
+    // margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    min-width: 27vw;
+    min-height: 26vh;
+    // max-width: 37vw;
+    // max-height: 25vh;
+    // width: 37vw;
+    // height: 25vh;
+
+    // .new-note-title{
+    //     font-size: 1.5rem;
+    //     font-weight: bold;
+    //     margin-bottom: 10px;
+    // }
+
+    // .new-note-body{
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     justify-content: center;
+
+    // }
+
+    .new-note-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .new-note-form-section-top{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        width: inherit;
+        padding-left: 10px;
+    }
+
+    .new-note-form-section-bottom{
+        width: inherit;
+    }
+
+    .new-note-form-field-label{
+        margin-right: 10px;
+        color: App.$fourth-color;
+    }
+
+    .new-note-form-title{
+        width: 90%;
+        resize: none;
+        margin-left: 3px;
+    }
+
+    .new-note-form-description{
+        width: 90%;
+        resize: none;
+    }
+
+    .new-note-form-due{
+        margin-left: 3px;
+        width: 115px;
+    }
+
+    .new-note-form-priority{
+        margin-left: 22px;
+        width: 120px;
+    }
+
+    .new-note-form-status{
+        margin-left: 25px;
+        width: 120px;
+    }
+
+    .new-note-form-shared{
+        margin-left: 13px;
+        width: 120px;
+    }
+
+    .new-note-form-field{
+        width: 100%;
+        margin-bottom: 10px;
+        color: App.$primary-color;
+        font-family: App.$primary-font;
+    }
+
+    .new-note-input{
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 0 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .new-note-button{
+        // width: 100%;
+        // height: 20px;
+        // border-radius: 5px;
+        // border: 1px solid #ccc;
+        // padding: 0 10px;
+        // font-size: .75rem;
+        // font-weight: bold;
+        // margin-bottom: 10px;
+        // background-color: #412474;
+        // color: #ccc;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 10px;
+        cursor: pointer;  
+        text-decoration: none;
+        color: App.$fourth-color;
+        font-size: 1.5rem;
+        font-family: App.$primary-font, sans-serif;
+        background-color: App.$fifth-color;
+        border: .5px solid App.$fourth-color;
+        border-radius: 5px;  
+    }
+
+    .new-note-button:hover{
+        background-color: #412474;
+    }
+
+    .new-note-button:active{
+        background-color: #412474;
+    }
+
+    .new-note-button:focus{
+        background-color: #412474;
+    }
+
+    .new-note-button:disabled{
+        background-color: #ccc;
+    }
+
+    .new-note-button:disabled:hover{
+        background-color: #ccc;
+    }
+
+
+}

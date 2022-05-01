@@ -1,4 +1,4 @@
-@import "/Users/josuearredondo/Non-iCloud Items/DevMountain-course-files/Projects/Reduce-n-produce/capstone/node_modules/bootstrap/scss/bootstrap.scss";
+// @import "/Users/josuearredondo/Non-iCloud Items/DevMountain-course-files/Projects/Reduce-n-produce/capstone/node_modules/bootstrap/scss/bootstrap.scss";
 $primary-color: #1d1b2e;
 $secondary-color: #343142;
 $secondary-color-darker: #343142a8;
@@ -10,6 +10,15 @@ $primary-font: 'Archivo', sans-serif;
 $inactive-icon: rgba(255, 255, 255, 0.3);
 // HORIZONTAL background:-webkit-linear-gradient(0deg, #7754B2 0%, #343142 27%, #1D1B2E 86%);
 // VERTICAL: background:-webkit-linear-gradient(90deg, #7754B2 0%, #343142 27%, #1D1B2E 86%);
+*::-webkit-scrollbar {
+  width: 0.9em;
+  height: 0.9em;
+  display: none;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
 
 .App {
     text-align: center;
@@ -33,7 +42,7 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
     background-color: $secondary-color;
     // color:  $fourth-color;
     text-align: center;
-    max-width: 100px;
+    // max-width: 100px;
     // margin: 0 auto;
   }
   
@@ -49,7 +58,7 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
     border-top: 1px solid $inactive-icon;
     grid-row: 6 / 7;
     grid-column: 1 / 2;
-    padding: 10px;
+    padding-bottom: 20px;
   }
   
   /*item-0*/
@@ -91,17 +100,6 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
     text-decoration: none;
   }
 
-  .addTask{
-    position: relative;
-  }
-
-  // .popover{}
-
- .popover-basic {
-    overflow: auto;
-    position: absolute;
-  }
-
   .action:hover{
     color: $fifth-color;
   }
@@ -131,19 +129,15 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
 
   }
   
-  // button {
-  //   font-size: calc(10px + 2vmin);
-  // }
-  
   .nav-list{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    // width: 100%;
+    width: 100%;
     height: 80%;
-    padding: 10px;
-    // padding-top: 50%;
+    padding-left: 7px;
+    padding-top: 30%;
 
     ul > li {
       list-style: none;
@@ -159,21 +153,6 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
       padding: initial;
     }
   
-  }
-
-
-  .popover-header{
-    background-color: #412474;
-    color: $fourth-color;
-    font-size: calc(10px + 2vmin);
-    // background-color: $secondary-color-darker;
-    // color: $fourth-color;
-  }
-  
-  .popover-body{
-    background-color: rgba(119, 84, 178, 0.9);
-    color: $fourth-color;
-    // font-size: calc(10px + 2vmin);
   }
   
 

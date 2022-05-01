@@ -1,7 +1,4 @@
-import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
-import useAxios from "./Hooks/hooks";
 
 import "./App.scss";
 import "./styles/Register.scss";

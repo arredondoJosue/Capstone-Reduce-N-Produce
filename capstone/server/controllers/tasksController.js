@@ -34,6 +34,28 @@ module.exports = {
           res.status(500).send(error);
         });
     }),
+  newTask:
+    ("/api/v1/tasks/new-task",
+    (req, res) => {
+      const { description, dueDate, user_id, assignedTo } = req.body;
+
+      const task_description_esc = description.replace(/'/g, "''");
+      const task_due_esc = dueDate.replace(/'/g, "''");
+      const task_assignee_id_esc =
+        assignedTo === "" ? null : assignedTo.replace(/'/g, "''");
+
+      sequelize
+        .query(
+          `INSERT INTO tasks(task_description, task_created_at, task_due, task_iscomplete, task_author_id, task_assingee_id)
+          VALUES ('${task_description_esc}', NOW(), '${task_due_esc}', FALSE, ${user_id}, ${task_assignee_id_esc})`
+        )
+        .then((task) => {
+          res.status(200).send(task[0]);
+        })
+        .catch((error) => {
+          res.status(500).send(error);
+        });
+    }),
   completedTask:
     ("/api/v1/tasks/completed_task/:user_id",
     (req, res) => {

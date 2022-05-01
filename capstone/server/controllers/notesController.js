@@ -28,6 +28,32 @@ module.exports = {
           res.status(500).send(error);
         });
     }),
+  newNote:
+    (`/api/v1/notes/new-note`,
+    (req, res) => {
+      const { noteTitle, noteText, sharedWith, user_id } = req.body;
+
+      // const agenda_text_esc = sequelize.escape(agenda_text);
+      const note_title_esc = noteTitle.replace(/'/g, "''");
+      const note_text_esc = noteText.replace(/'/g, "''");
+      const shared_with_esc =
+        sharedWith === "" ? null : sharedWith.replace(/'/g, "''");
+
+      console.log("USER: ", user_id);
+
+      sequelize
+        .query(
+          `
+        INSERT INTO notes(note_title, note_text, note_timestamp, note_author_id, note_shared_with)
+        VALUES ('${note_title_esc}', '${note_text_esc}', NOW(), ${user_id} , ${shared_with_esc})`
+        )
+        .then((note) => {
+          res.status(200).send(note);
+        })
+        .catch((error) => {
+          res.status(500).send(error);
+        });
+    }),
   getAgenda:
     ("/api/v1/agenda",
     (req, res) => {

@@ -1,3 +1,4 @@
+// import "../styles/BootCustom.scss";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,6 +8,7 @@ import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
 
 import NewTask from "./NewTask";
+import NewNote from "./NewNote";
 
 import { initializeApp } from "firebase/app";
 import { getAuth, signOut } from "firebase/auth";
@@ -28,11 +30,27 @@ export default function Navbar() {
     textDecoration: "none",
   };
 
-  function addTask() {
-    setActionItem(true);
-    console.log("add task");
-    setActionItem(false);
-  }
+  const popoverContainer = {
+    postition: "absolute !important",
+    top: "-65px !important",
+    left: "55px !important",
+    right: "auto !important",
+    bottom: "65px !important",
+    transform: "translate3d(5px, 64.5px, 0px) !important",
+    maxHeight: "100vh !important",
+  };
+
+  // function addTask() {
+  //   setActionItem(true);
+  //   console.log("add task");
+  //   setActionItem(false);
+  // }
+
+  // function addNote() {
+  //   setActionItem(true);
+  //   console.log("add task");
+  //   setActionItem(false);
+  // }
 
   const popover = (
     <Popover id="popover-basic">
@@ -43,25 +61,42 @@ export default function Navbar() {
     </Popover>
   );
 
+  const popoverNote = (
+    <Popover id="popover-basic">
+      <PopoverHeader as="h3">Add New Note</PopoverHeader>
+      <PopoverBody>
+        <NewNote />
+      </PopoverBody>
+    </Popover>
+  );
+
   return (
     <>
       <nav className="navbar action-items">
         <ul className="nav-list">
           <li className="navbar-li-items">
-            <OverlayTrigger trigger="click" placement="auto" overlay={popover}>
-              <span
-                className="material-icons action addTask"
-                style={iconStyle}
-                onClick={addTask}
-              >
+            <OverlayTrigger
+              rootClose
+              trigger="click"
+              placement="auto"
+              overlay={popover}
+            >
+              <span className="material-icons action addTask" style={iconStyle}>
                 add_task
               </span>
             </OverlayTrigger>
           </li>
           <li className="navbar-li-items">
-            <span className="material-icons action" style={iconStyle}>
-              note_add
-            </span>
+            <OverlayTrigger
+              rootClose
+              trigger="click"
+              placement="auto"
+              overlay={popoverNote}
+            >
+              <span className="material-icons action" style={iconStyle}>
+                note_add
+              </span>
+            </OverlayTrigger>
           </li>
           <li className="navbar-li-items">
             <span className="material-icons action" style={iconStyle}>

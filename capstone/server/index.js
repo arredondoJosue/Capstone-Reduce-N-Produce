@@ -4,10 +4,15 @@ const app = express();
 const cors = require("cors");
 
 const { connect, test, messages } = require("./controllers/controller");
-const { getTasks, completedTask } = require("./controllers/tasksController");
+const {
+  getTasks,
+  newTask,
+  completedTask,
+} = require("./controllers/tasksController");
 const { getUser } = require("./controllers/usersController");
 const {
   getNotes,
+  newNote,
   getAgenda,
   updateAgenda,
 } = require("./controllers/notesController");
@@ -31,11 +36,13 @@ app.get(baseURL + "/test", test);
 app.get(baseURL + "/messages", messages);
 
 app.get(baseURL + "/tasks/:user_id", getTasks);
+app.post(baseURL + "/tasks/new-task", newTask);
 app.put(baseURL + "/tasks/completed_task/:user_id", completedTask);
 
 app.get(baseURL + "/user", getUser);
 
 app.get(baseURL + "/notes", getNotes);
+app.post(baseURL + "/notes/new-note", newNote);
 app.get(baseURL + "/agenda", getAgenda);
 app.post(baseURL + "/agenda-update", updateAgenda);
 
