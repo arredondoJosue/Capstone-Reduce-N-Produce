@@ -70,8 +70,13 @@ export default function ProfileInfo() {
               </span>
             </span>
           </div>
-          <span className="profile-edit-button">
-            <button onClick={() => navigate("/profile/edit-user")}>Edit</button>
+          <span className="profile-edit-button-text">
+            <button
+              className="profile-edit-button"
+              onClick={() => navigate("/profile/edit-user")}
+            >
+              Edit
+            </button>
           </span>
         </div>
       </header>
