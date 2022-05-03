@@ -1,6 +1,9 @@
 // import "../styles/BootCustom.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setTasks, setPopoverTask, setPopoverNote } from "../Hooks/userSlice";
 
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
@@ -18,8 +21,54 @@ import firebaseConfig from "../Hooks/firebase";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+let useClickOutsideTask = (handler) => {
+  let domNodeTask = useRef();
+
+  useEffect(() => {
+    let maybeHandler = (event) => {
+      if (domNodeTask.current && !!domNodeTask.current.contains(event.target)) {
+        handler();
+      }
+    };
+
+    document.addEventListener("mousedown", maybeHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", maybeHandler);
+    };
+  });
+
+  return domNodeTask;
+};
+
+let useClickOutsideNote = (handler) => {
+  let domNodeNote = useRef();
+
+  useEffect(() => {
+    let maybeHandler = (event) => {
+      if (domNodeNote.current && !!domNodeNote.current.contains(event.target)) {
+        handler();
+      }
+    };
+
+    document.addEventListener("mousedown", maybeHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", maybeHandler);
+    };
+  });
+
+  return domNodeNote;
+};
+
 export default function Navbar() {
   const [actionItem, setActionItem] = useState(false);
+  const [showTask, setShowTask] = useState(false);
+  const [showNote, setShowNote] = useState(false);
+
+  const popTaskToggle = useSelector((state) => state.globalStore.popoverTask);
+  const popNoteToggle = useSelector((state) => state.globalStore.popoverNote);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const iconStyle = {
@@ -40,34 +89,61 @@ export default function Navbar() {
     maxHeight: "100vh !important",
   };
 
-  // function addTask() {
-  //   setActionItem(true);
-  //   console.log("add task");
-  //   setActionItem(false);
-  // }
+  let domNode = useClickOutsideTask(() => setShowTask(false));
+  let domNodeNote = useClickOutsideNote(() => setShowNote(false));
 
-  // function addNote() {
-  //   setActionItem(true);
-  //   console.log("add task");
-  //   setActionItem(false);
-  // }
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
-  const popover = (
-    <Popover id="popover-basic">
-      <PopoverHeader as="h3">Add New Task</PopoverHeader>
-      <PopoverBody>
-        <NewTask />
-      </PopoverBody>
-    </Popover>
+  // const handleClickOutside = (e) => {
+  //   if (actionItem && !actionItem.contains(e.target)) {
+  //     setActionItem(false);
+  //   } else if (actionItem && actionItem.contains(e.target)) {
+  //     setActionItem(actionItem);
+  //   }
+  // };
+
+  // const popover = (
+  //   <Popover id="popover-basic">
+  //     <PopoverHeader as="h3">Add New Task</PopoverHeader>
+  //     <PopoverBody>
+  //       <NewTask handleShow={handleShow} />
+  //     </PopoverBody>
+  //   </Popover>
+  // );
+
+  // const popoverNote = (
+  //   <Popover id="popover-basic">
+  //     <PopoverHeader as="h3">Add New Note</PopoverHeader>
+  //     <PopoverBody>
+  //       <NewNote />
+  //     </PopoverBody>
+  //   </Popover>
+  // );
+  const popoverNote = (
+    <div ref={domNodeNote} id="pop-click">
+      <div id="popover-basic">
+        <h3 className="popover-header">Add New Note</h3>
+        <div className="popover-body">
+          <NewNote />
+        </div>
+      </div>
+    </div>
   );
 
-  const popoverNote = (
-    <Popover id="popover-basic">
-      <PopoverHeader as="h3">Add New Note</PopoverHeader>
-      <PopoverBody>
-        <NewNote />
-      </PopoverBody>
-    </Popover>
+  const popover = (
+    <div ref={domNode} id="pop-click">
+      <div id="popover-basic">
+        <h3 className="popover-header">Add New Task</h3>
+        <div className="popover-body">
+          <NewTask />
+        </div>
+      </div>
+    </div>
   );
 
   return (
@@ -75,19 +151,37 @@ export default function Navbar() {
       <nav className="navbar action-items">
         <ul className="nav-list">
           <li className="navbar-li-items">
-            <OverlayTrigger
+            {/* <OverlayTrigger
               rootClose
               trigger="click"
               placement="auto"
               overlay={popover}
+              defaultShow={false}
             >
               <span className="material-icons action addTask" style={iconStyle}>
                 add_task
               </span>
-            </OverlayTrigger>
+            </OverlayTrigger> */}
+            {showTask ? popover : null}
+            <span
+              className="material-icons action addTask"
+              style={iconStyle}
+              onClick={() => setShowTask((show) => !show)}
+            >
+              add_task
+            </span>
           </li>
           <li className="navbar-li-items">
-            <OverlayTrigger
+            {showNote ? popoverNote : null}
+            <span
+              className="material-icons action"
+              style={iconStyle}
+              onClick={() => setShowNote((show) => !show)}
+            >
+              note_add
+            </span>
+
+            {/* <OverlayTrigger
               rootClose
               trigger="click"
               placement="auto"
@@ -96,7 +190,7 @@ export default function Navbar() {
               <span className="material-icons action" style={iconStyle}>
                 note_add
               </span>
-            </OverlayTrigger>
+            </OverlayTrigger> */}
           </li>
           <li className="navbar-li-items">
             <span className="material-icons action" style={iconStyle}>
@@ -197,99 +291,5 @@ export default function Navbar() {
         </ul>
       </nav>
     </>
-
-    // THIS IS WITH THE NAVBAR WRAPPED IN A CONTAINER
-    // <div className="navbar-container">
-    //   <nav className="navbar action-items">
-    //     <ul className="nav-list">
-    //       <li className="navbar-li-items">
-    //         <OverlayTrigger trigger="click" placement="auto" overlay={popover}>
-    //           <span className="material-icons action" onClick={addTask}>
-    //             add_task
-    //           </span>
-    //         </OverlayTrigger>
-    //       </li>
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons action">note_add</span>
-    //       </li>
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons action">post_add</span>
-    //       </li>
-    //     </ul>
-    //   </nav>
-    //   <nav className="navbar main-nav">
-    //     <ul className="nav-list">
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons">
-    //           <Link to="/home">home</Link>
-    //         </span>
-    //       </li>
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons">
-    //           <Link to="/org">meeting_room</Link>
-    //         </span>
-    //       </li>
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons">
-    //           <Link to="/move-in-out">holiday_village</Link>
-    //         </span>
-    //       </li>
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons">
-    //           <Link to="/callings">ring_volume</Link>
-    //         </span>
-    //       </li>
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons">
-    //           <Link to="/ward-council">groups</Link>
-    //         </span>
-    //       </li>
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons">
-    //           <Link to="/messaging">chat</Link>
-    //         </span>
-    //       </li>
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons">
-    //           <Link to="/edit-page">newspaper</Link>
-    //         </span>
-    //       </li>
-    //       <li className="navbar-li-items">
-    //         <span className="material-icons">
-    //           <Link to="/profile">account_circle</Link>
-    //         </span>
-    //       </li>
-    //     </ul>
-    //   </nav>
-    //   <nav className="navbar logout">
-    //     <ul className="nav-list">
-    //       <li className="navbar-li-items">
-    //         <span
-    //           className="material-icons"
-    //           // onClick={() =>
-    //           //   signOut(auth)
-    //           //     .then(() => {
-    //           //       console.log("successfully logged out");
-    //           //       navigate("/");
-    //           //     })
-    //           //     .catch((err) => console.log("DID NOT LOGOUT ", err))
-    //           // }
-    //           onClick={async () => {
-    //             console.log(auth);
-    //             try {
-    //               await signOut(auth);
-    //               console.log("successfully logged out", auth);
-    //               navigate("/");
-    //             } catch (err) {
-    //               console.log("DID NOT LOGOUT ", err);
-    //             }
-    //           }}
-    //         >
-    //           <Link to="/">power_settings_new</Link>
-    //         </span>
-    //       </li>
-    //     </ul>
-    //   </nav>
-    // </div>
   );
 }

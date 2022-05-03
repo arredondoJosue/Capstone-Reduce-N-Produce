@@ -1,9 +1,11 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./App.scss";
 import "./styles/Register.scss";
 import "./styles/Widgets.scss";
 import "./styles/Callings.scss";
+
+// import { DataProvider } from "./context/DataContext";
 
 import Navbar from "./components/Navbar";
 import Home from "./components/Pages/Home";
@@ -21,13 +23,14 @@ import NewTask from "./components/NewTask";
 function App() {
   return (
     <div className="App">
+      {/* <DataProvider> */}
       <Navbar />
       <header className="App-header">
         {/* <Login /> */}
         {/* <Register /> */}
         {/* <button onClick={seedData}>Seed</button>
-        <div>{data}</div>
-        <div>{seedData}</div> */}
+          <div>{data}</div>
+          <div>{seedData}</div> */}
         <Routes>
           <Route index element={<Login />} />
           <Route path="/home" element={<Home />} />
@@ -43,6 +46,7 @@ function App() {
           <Route path="/new-task" element={<NewTask />} />
         </Routes>
       </header>
+      {/* </DataProvider> */}
     </div>
   );
 }

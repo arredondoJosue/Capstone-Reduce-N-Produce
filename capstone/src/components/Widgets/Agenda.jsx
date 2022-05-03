@@ -15,9 +15,9 @@ export default function Agenda() {
   useEffect(() => {
     axios.get("http://localhost:5000/api/v1/agenda").then((res) => {
       setAgenda(res.data[0].agenda_text);
-      console.log(agenda[0].agenda_text);
+      // console.log(agenda[0].agenda_text);
       setState(true);
-      console.log(state);
+      // console.log(state);
     });
   }, []);
 

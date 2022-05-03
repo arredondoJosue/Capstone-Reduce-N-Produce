@@ -18,7 +18,7 @@ module.exports = {
   getTasks:
     ("/api/v1/tasks/:user_id",
     (req, res) => {
-      console.log(req.params.user_id);
+      console.log("HIT GET TASKS BACKEND ", req.params.user_id);
       sequelize
         .query(
           // "SELECT * FROM tasks INNER JOIN users ON tasks.user_id = users.user_id"
@@ -40,7 +40,8 @@ module.exports = {
       const { description, dueDate, user_id, assignedTo } = req.body;
 
       const task_description_esc = description.replace(/'/g, "''");
-      const task_due_esc = dueDate.replace(/'/g, "''");
+      const task_due_esc =
+        typeof dueDate === "object" ? dueDate.formattedDate : dueDate;
       const task_assignee_id_esc =
         assignedTo === "" ? null : assignedTo.replace(/'/g, "''");
 

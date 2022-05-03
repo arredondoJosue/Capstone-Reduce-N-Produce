@@ -38,7 +38,8 @@ module.exports = {
           isAdmin BOOLEAN DEFAULT FALSE,
           user_initials varchar(3),
           user_avatar_color varchar(75),
-          user_created_at timestamp
+          user_created_at timestamp,
+          uid varchar(200)
         );
         
         CREATE TABLE ward (
@@ -171,9 +172,9 @@ module.exports = {
         ( 12, 'Secretary 2', (SELECT org_id FROM org WHERE org_id = 2)),
         ( 13, 'General', (SELECT org_id FROM org WHERE org_id = 3));
         
-        INSERT INTO users(user_id, first_name, last_name, user_name, user_email, isAdmin, user_calling, user_org, user_ward, user_initials, user_avatar_color, user_created_at)
-        VALUES( 1, 'John', 'Appleseed', 'John Appleseed', 'test@test.com', TRUE, (SELECT calling_id from callings where calling_id = 1), (SELECT org_id from org where org_id = 1), (SELECT ward_id from ward where ward_id = 1), 'JA', 'default', NOW()),
-        ( 2, 'Dane', 'Joe', 'Dane Joe', 'bebz@bebz.com', TRUE, (SELECT calling_id from callings where calling_id = 1), (SELECT org_id from org where org_id = 1), (SELECT ward_id from ward where ward_id = 1), 'JD', 'default', NOW());
+        INSERT INTO users(user_id, first_name, last_name, user_name, user_email, isAdmin, user_calling, user_org, user_ward, user_initials, user_avatar_color, user_created_at, uid)
+        VALUES( 1, 'John', 'Appleseed', 'John Appleseed', 'test@test.com', TRUE, (SELECT calling_id from callings where calling_id = 1), (SELECT org_id from org where org_id = 1), (SELECT ward_id from ward where ward_id = 1), 'JA', 'default', NOW(), 'svDpyZeVDpO4zzYDviHckbRvDqO2'),
+        ( 2, 'Dane', 'Joe', 'Dane Joe', 'bebz@bebz.com', TRUE, (SELECT calling_id from callings where calling_id = 1), (SELECT org_id from org where org_id = 1), (SELECT ward_id from ward where ward_id = 1), 'JD', 'default', NOW(), 'UtkE7mZQCmg3jLuk2yDYGCb8VpI3');
         
         INSERT INTO proposed_callings(proposed_id, proposed_calling, proposed_name, proposed_release_name, proposed_needed_date, proposed_created_at, proposed_description, proposed_by, proposed_by_org, proposed_phase, proposed_status)
         VALUES( 1, 'CEO of Twitter', 'Elon Musk', 'Bill Gates', (NOW() + interval '3 weeks'), NOW(), 'This is the first proposed applicant', (SELECT user_id from users where user_id = 1), (SELECT org_id from org where org_id = 1), 'Approval', 'New'),

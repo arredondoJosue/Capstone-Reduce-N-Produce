@@ -16,12 +16,29 @@ const sequelize = new Sequelize(connection, {
 
 module.exports = {
   getUser:
-    ("/api/v1/user",
+    ("/api/v1/user/:uid",
     (req, res) => {
       sequelize
         .query(
           // "SELECT * FROM tasks INNER JOIN users ON tasks.user_id = users.user_id"
-          "SELECT * FROM users"
+          `SELECT * FROM users
+          WHERE uid = '${req.params.uid}';`
+        )
+        .then((user) => {
+          console.log(user[0]);
+          res.status(200).send(user[0]);
+        })
+        .catch((error) => {
+          res.status(500).send(error);
+        });
+    }),
+  getAllUsers:
+    ("/api/v1/users",
+    (req, res) => {
+      sequelize
+        .query(
+          // "SELECT * FROM tasks INNER JOIN users ON tasks.user_id = users.user_id"
+          `SELECT * FROM users;`
         )
         .then((user) => {
           console.log(user[0]);

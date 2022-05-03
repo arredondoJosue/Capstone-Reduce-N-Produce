@@ -2,17 +2,26 @@ import React from "react";
 import { Formik, Field, Form } from "formik";
 import axios from "axios";
 import "../styles/NewTask.scss";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setTasks, setPopoverTask } from "../Hooks/userSlice";
 
 export default function NewTask() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.globalStore.userInfo);
+  const users = useSelector((state) => state.globalStore.allUsers);
+  const popToggle = useSelector((state) => state.globalStore.popoverTask);
+
   const defaultDate = new Date(Date() + 1);
   const formattedDate =
     defaultDate.getFullYear() +
     "-" +
-    defaultDate.getMonth() +
+    (defaultDate.getMonth() + 1) +
     "-" +
-    defaultDate.getDate(+1);
-  console.log(formattedDate);
+    defaultDate.getDate();
+  console.log(users);
 
+  let x = user.user_id;
   return (
     <div className="new-task">
       {/* <div className="new-task-header">
@@ -23,22 +32,36 @@ export default function NewTask() {
         <Formik
           initialValues={{
             description: "", // task_description
-            dueDate: { defaultDate }, // task_due
+            dueDate: { formattedDate }, // task_due
             priority: "", // task_priority
+            user_id: x, // task_author_id INT
             status: "", // task_status
-            user_id: 1, // task_author_id INT
             assignedTo: "", // task_assignee_id INT
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
+
+              console.log(typeof values.dueDate);
               axios
                 .post("http://localhost:5000/api/v1/tasks/new-task", values)
                 .then((res) => {
-                  console.log(res);
+                  console.log("RESPONSE AFTER TASKS POST: ", res);
+                  values.description = "";
+                  values.dueDate = { formattedDate };
+                  values.priority = "";
+                  values.status = "";
+                  values.assignedTo = "";
+                  dispatch(setPopoverTask(!popToggle));
+                  // dispatch(setTasks(res.data)); // set tasks to the response data from the server
                 })
                 .then(() => {
-                  setSubmitting(false);
+                  axios
+                    .get(`http://localhost:5000/api/v1/tasks/${user.user_id}`)
+                    .then((res) => {
+                      console.log("hit the tasks get route with: ", res.data);
+                      dispatch(setTasks(res.data)); // set tasks to the response data from the server
+                    });
                 })
                 .catch((err) => {
                   console.log(err);
@@ -115,6 +138,7 @@ export default function NewTask() {
                       <option value="Completed">Completed</option>
                     </Field>
                   </div>
+
                   <div className="new-task-form-field">
                     <label
                       className="new-task-form-field-label"
@@ -126,11 +150,17 @@ export default function NewTask() {
                       className="new-task-form-assigned"
                       as="select"
                       name="assignedTo"
+                      placeholder="Select Assignee"
                     >
-                      <option value="">Select</option>
-                      <option value={1}>John Doe</option>
+                      {/* <option value="">Select</option> */}
+                      {/* <option value={1}>John Doe</option>
                       <option value={2}>Jane Doe</option>
-                      <option value={3}>Joe Doe</option>
+                      <option value={3}>Joe Doe</option> */}
+                      {users.map((user) => {
+                        return (
+                          <option value={user.user_id}>{user.user_name}</option>
+                        );
+                      })}
                     </Field>
                   </div>
                 </div>

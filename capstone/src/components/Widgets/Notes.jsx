@@ -13,7 +13,7 @@ export default function Notes() {
 
   let notesList = notes.map((note) => {
     return (
-      <div className="child-widget-subcontainer">
+      <div className="child-widget-subcontainer" key={note.note_id}>
         <div>{note.note_id}</div>
         <div>Title: {note.note_title}</div>
         <div>{note.note_text}</div>

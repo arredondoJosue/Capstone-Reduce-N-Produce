@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Field, Form } from "formik";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setNotes, setPopoverNote } from "../Hooks/userSlice";
+
 import axios from "axios";
 import "../styles/NewNote.scss";
 
-export default function NewNote() {
-  // CREATE NEW NOTE
-  // note_title, note_text, note_timestamp, note_author_id, note_shared_with
+export default function NewNote({ handleShow }) {
+  const userInfo = useSelector((state) => state.globalStore.userInfo);
+  const dispatch = useDispatch();
+
+  let x = false;
+  function toggleShow() {
+    handleShow(x);
+  }
 
   return (
     <div className="new-note">
@@ -18,7 +27,7 @@ export default function NewNote() {
             noteTitle: "",
             noteText: "",
             sharedWith: "",
-            user_id: 1,
+            user_id: userInfo.user_id,
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
@@ -27,12 +36,17 @@ export default function NewNote() {
                 .post("http://localhost:5000/api/v1/notes/new-note", values)
                 .then((res) => {
                   console.log(res);
+                  values.noteTitle = "";
+                  values.noteText = "";
+                  values.sharedWith = "";
+                  dispatch(setNotes(res.data)); // set tasks to the response data from the server
                 })
                 .then(() => {
                   axios
-                    .get(`http://localhost:5000/api/v1/tasks/${1}`)
+                    .get(`http://localhost:5000/api/v1/notes`)
                     .then((res) => {
-                      setTasks(res.data);
+                      // dispatch(setNotes(res.data)); // set tasks to the response data from the server
+                      console.log("hit the notes get route");
                     })
                     .catch((err) => {
                       console.log(err);
