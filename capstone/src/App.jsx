@@ -5,8 +5,6 @@ import "./styles/Register.scss";
 import "./styles/Widgets.scss";
 import "./styles/Callings.scss";
 
-// import { DataProvider } from "./context/DataContext";
-
 import Navbar from "./components/Navbar";
 import Home from "./components/Pages/Home";
 import Profile from "./components/Profile";
@@ -23,14 +21,8 @@ import NewTask from "./components/NewTask";
 function App() {
   return (
     <div className="App">
-      {/* <DataProvider> */}
       <Navbar />
       <header className="App-header">
-        {/* <Login /> */}
-        {/* <Register /> */}
-        {/* <button onClick={seedData}>Seed</button>
-          <div>{data}</div>
-          <div>{seedData}</div> */}
         <Routes>
           <Route index element={<Login />} />
           <Route path="/home" element={<Home />} />
@@ -41,12 +33,10 @@ function App() {
           <Route path="/ward-council" element={<WardCouncil />} />
           <Route path="/messaging" element={<Messaging />} />
           <Route path="/edit-page" element={<EditPage />} />
-          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/register" element={<Register />} />
           <Route path="/new-task" element={<NewTask />} />
         </Routes>
       </header>
-      {/* </DataProvider> */}
     </div>
   );
 }

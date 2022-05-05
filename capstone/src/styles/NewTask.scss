@@ -18,10 +18,10 @@
 #pop-click {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 10000px;
-    height: 10000px;
-    // background-color: #f5f5f517;
+    left: 350px;
+    width: 75vw;
+    height: 100vh;
+    background-color: #db232317;
 }
 
 
@@ -31,11 +31,17 @@
     transform: translate3d(5px, 64.5px, 0px) !important; 
     border-radius: 5px;
     border: 1px solid #ccc;
-    background-color: rgb(118, 84, 178);
+    background-color: App.$primary-color;
+    // background-color: App.$primary-color;
+    // background-color:rgba(115, 173, 215, 0.237);
+    // box-shadow: 5px 5px 0px 0px App.$secondary-color-darker;
   }
 
   .popover-header{
-    background-color: #412474;
+    // background-color: #412474;
+    // background-color:rgba(115, 173, 215, 0.237);
+    background-color: App.$secondary-color;
+
     color: App.$fourth-color;
     font-size: calc(10px + 2vmin);
     margin-bottom: 0px;
@@ -50,7 +56,9 @@
   }
   
   .popover-body{
-    background-color: rgb(118, 84, 178);
+    // background-color: rgb(118, 84, 178);
+    // background-color:rgba(115, 173, 215, 0.237);
+
     color: App.$fourth-color;
     // border-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -63,7 +71,10 @@
 
 .new-task{
     // background-color: #f5f5f5;
-    background-color: rgb(118, 84, 178);
+    // background-color: rgb(118, 84, 178);
+    // background-color:rgba(115, 173, 215, 0.237);
+    background-color: App.$primary-color;
+
     border-radius: 5px;
     font-size: 1rem;
     // padding: 10px;
@@ -123,26 +134,65 @@
 
     .new-task-form-description{
         width: 90%;
+        font-family: Arial, Helvetica, sans-serif;
+        // background-color: #ccc;
+        color: App.$fourth-color;
+        background-color: rgba(204, 204, 204, 0.065);
+        border: none;
+        border-bottom: 2px solid #ccc;
+        font-size: 1rem;
+        margin-top: 10px;
     }
 
     .new-task-form-due{
         margin-left: 3px;
         width: 115px;
+
+        color: App.$fourth-color;
+        background-color: rgba(204, 204, 204, 0.065);
+        border: none;
+        border-bottom: 2px solid #ccc;
+        font-size: .9rem;
+
+        &::-webkit-calendar-picker-indicator{
+            filter: invert(1)
+        }
+
     }
 
     .new-task-form-priority{
         margin-left: 22px;
         width: 120px;
+
+        color: App.$fourth-color;
+        background-color: rgba(204, 204, 204, 0.065);
+        border: none;
+        border-bottom: 2px solid #ccc;
+        font-size: .9rem;
+
     }
 
     .new-task-form-status{
         margin-left: 25px;
         width: 120px;
+
+        color: App.$fourth-color;
+        background-color: rgba(204, 204, 204, 0.065);
+        border: none;
+        border-bottom: 2px solid #ccc;
+        font-size: .9rem;
+
     }
 
     .new-task-form-assigned{
         margin-left: 22px;
         width: 120px;
+
+        color: App.$fourth-color;
+        background-color: rgba(204, 204, 204, 0.065);
+        border: none;
+        border-bottom: 2px solid #ccc;
+        font-size: .9rem;
     }
 
     .new-task-form-field{
@@ -164,26 +214,44 @@
     }
 
     .new-task-button{
-        width: 100%;
-        height: 20px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        padding: 0 10px;
-        font-size: .75rem;
-        font-weight: bold;
-        margin-bottom: 10px;
+        // width: 100%;
+        // height: 20px;
+        // border-radius: 5px;
+        // border: 1px solid #ccc;
+        // padding: 0 10px;
+        // font-size: .75rem;
+        // font-weight: bold;
+        // margin-bottom: 10px;
+        cursor: pointer;
+        background-color: App.$primary-color;
+        border: none;
+        color: App.$fourth-color;
+        font-size: 1.25rem;
+        font-family: inherit;
+        margin-bottom: 5px;
+    
+        &:hover{
+            background-color: App.$secondary-color;
+            border-radius: 5px;
+        }
     }
 
-    .new-task-button:hover{
-        background-color: #ccc;
-    }
+    // .new-task-button:hover{
+    //     // background-color: #ccc;
+    // background-color:rgba(115, 173, 215, 0.639);
+        
+    // }
 
     .new-task-button:active{
-        background-color: #ccc;
+        // background-color: #ccc;
+    background-color:rgba(115, 173, 215, 0.639);
+
     }
 
     .new-task-button:focus{
-        background-color: #ccc;
+        // background-color: #ccc;
+    background-color:rgba(115, 173, 215, 0.237);
+
     }
 
     .new-task-button:disabled{

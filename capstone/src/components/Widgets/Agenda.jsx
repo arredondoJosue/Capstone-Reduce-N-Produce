@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 // import { CKEditor } from "@ckeditor/ckeditor5-react";
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
@@ -12,28 +13,31 @@ export default function Agenda() {
   let [agendaEditState, setAgendaEditState] = useState(true);
   let [saveState, setSaveState] = useState(false);
 
+  const userInfo = useSelector((state) => state.globalStore.userInfo);
+
   useEffect(() => {
-    axios.get("http://localhost:5000/api/v1/agenda").then((res) => {
-      setAgenda(res.data[0].agenda_text);
-      // console.log(agenda[0].agenda_text);
-      setState(true);
-      // console.log(state);
-    });
+    axios
+      .get(`http://localhost:5000/api/v1/agenda/${userInfo.user_org}`)
+      .then((res) => {
+        setAgenda(res.data[0].agenda_text);
+        // console.log(res.data[0].agenda_text);
+        setState(true);
+        // console.log(state);
+      });
   }, []);
 
   function saveAgenda() {
     let data = JSON.stringify({
       agenda_text: agendaText,
-      agenda_id: 1,
+      agenda_id: userInfo.user_org,
     });
 
-    console.log("WHAT IS BEING SENT OUT: ", data);
+    // console.log("WHAT IS BEING SENT OUT: ", data);
     axios
       .post(`http://localhost:5000/api/v1/agenda-update`, data, {
         headers: { "Content-Type": "application/json" },
       })
       .then((res) => {
-        console.log(res.config.data);
         setAgendaEditState(true);
       })
       .catch((err) => {

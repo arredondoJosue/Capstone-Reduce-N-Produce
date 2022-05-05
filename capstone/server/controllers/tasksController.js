@@ -38,6 +38,7 @@ module.exports = {
     ("/api/v1/tasks/new-task",
     (req, res) => {
       const { description, dueDate, user_id, assignedTo } = req.body;
+      // const task_due_esc = req.params.due_date;
 
       const task_description_esc = description.replace(/'/g, "''");
       const task_due_esc =
@@ -69,6 +70,35 @@ module.exports = {
           SET task_iscomplete = ${req.body.isComplete}
           WHERE task_author_id = ${req.params.user_id}
           AND task_id = ${req.body.task_id}`
+        )
+        .then((tasks) => {
+          // console.log(tasks[0]);
+          res.status(200).send(tasks[0]);
+        })
+        .catch((error) => {
+          res.status(500).send(error);
+        });
+    }),
+  updateTask:
+    ("/api/v1/tasks/update/:task_id",
+    (req, res) => {
+      const { taskDescription, taskDue } = req.body;
+      // const task_due_esc = req.params.due_date;
+
+      const task_description_esc = taskDescription.replace(/'/g, "''");
+      // const task_due_esc =
+      //   typeof dueDate === "object" ? dueDate.formattedDate : dueDate;
+      // const task_assignee_id_esc =
+      //   assignedTo === "" ? null : assignedTo.replace(/'/g, "''");
+
+      // console.log("taskDescription ", req.body.taskDescription);
+      // console.log("task_id ", req.params.task_id);
+      // console.log("isComplete", req.body.taskDue);
+      sequelize
+        .query(
+          `UPDATE tasks
+          SET task_description = '${task_description_esc}', task_due = '${taskDue}'
+          WHERE task_id = ${req.params.task_id}`
         )
         .then((tasks) => {
           // console.log(tasks[0]);

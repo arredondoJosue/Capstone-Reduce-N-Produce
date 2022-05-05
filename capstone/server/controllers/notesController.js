@@ -15,11 +15,14 @@ const sequelize = new Sequelize(connection, {
 });
 
 module.exports = {
-  getNotes:
-    ("/api/v1/notes",
+  getUserNotes:
+    ("/api/v1/notes/:user_id",
     (req, res) => {
       sequelize
-        .query("SELECT * FROM notes")
+        .query(
+          `SELECT * FROM notes
+        WHERE note_author_id = ${req.params.user_id}`
+        )
         .then((notes) => {
           // console.log(notes[0]);
           res.status(200).send(notes[0]);
@@ -55,15 +58,16 @@ module.exports = {
         });
     }),
   getAgenda:
-    ("/api/v1/agenda",
+    ("/api/v1/agenda/:agenda_id",
     (req, res) => {
       sequelize
         .query(
           `
         SELECT agenda_text FROM agenda
-        WHERE agenda_id = 1`
+        WHERE agenda_org_id = ${req.params.agenda_id}`
         )
         .then((agenda) => {
+          // console.log(agenda[0]);
           res.status(200).send(agenda[0]);
         })
         .catch((error) => {

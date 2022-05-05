@@ -135,6 +135,9 @@ module.exports = {
         
         ALTER TABLE org
         ADD org_agenda_id INT REFERENCES agenda(agenda_id);
+
+        ALTER TABLE agenda
+        ADD agenda_org_id INT REFERENCES org(org_id);
         
         ALTER TABLE proposed_callings
         ADD proposed_by INT NOT NULL REFERENCES users(user_id),
@@ -142,15 +145,16 @@ module.exports = {
         
         ALTER TABLE notes
         ADD note_author_id INT REFERENCES users(user_id),
-        ADD note_shared_with INT REFERENCES users(user_id);
+        ADD note_shared_with INT REFERENCES users(user_id),
+        ADD note_org_id INT REFERENCES org(org_id);
         
         INSERT INTO ward(ward_id, ward_name)
         VALUES( 1, 'Ward 1');
         
-        INSERT INTO agenda(agenda_id, agenda_text, agenda_updated_at)
-        VALUES( 1, 'This is the agenda for the first week of the year for Developers', NOW()), 
-        ( 2, 'This is the agenda for the first week of the year for Project Managers', NOW()), 
-        ( 3, 'This is the agenda for the first week of the year for GENERAL TEAM', NOW());
+        INSERT INTO agenda(agenda_id, agenda_text, agenda_updated_at, agenda_org_id)
+        VALUES( 1, 'This is the agenda for the first week of the year for Developers', NOW(), (SELECT org_id from org where org_id = 1)), 
+        ( 2, 'This is the agenda for the first week of the year for Project Managers', NOW(), (SELECT org_id from org where org_id = 2)), 
+        ( 3, 'This is the agenda for the first week of the year for GENERAL TEAM', NOW(), (SELECT org_id from org where org_id = 3));
         
         INSERT INTO org(org_id, org_name, org_agenda_id)
         VALUES( 1, 'Developers', (SELECT agenda_id from agenda where agenda_id = 1)), 
@@ -224,13 +228,13 @@ module.exports = {
         ( 6, 'add more app functionality', NOW(), NOW() + interval '1 day', (SELECT org_id from org where org_id = 3), (SELECT user_id from users where user_id = 2)), 
         ( 7, 'make app pretty', NOW(), NOW() + interval '1 day', (SELECT org_id from org where org_id = 3), (SELECT user_id from users where user_id = 2));
         
-        INSERT INTO notes(note_id, note_title, note_text, note_timestamp, note_author_id)
-        VALUES( 1, 'Test Note', 'This is a test note', NOW(), (SELECT user_id from users where user_id = 1)), 
-        ( 2, 'Some Random Note', 'lorem', NOW(), (SELECT user_id from users where user_id = 1)), 
-        ( 3, 'Thoughts about pluralsight', 'Pluralsight videos need some work....', NOW(), (SELECT user_id from users where user_id = 1)), 
-        ( 4, 'THoughts about backend', 'Backend is a beast. Holy wow. I wanna conquer the beast though.', NOW(), (SELECT user_id from users where user_id = 2)), 
-        ( 5, 'Meeting', 'This meeting is boring. I wish i were doing something ', NOW(), (SELECT user_id from users where user_id = 2)), 
-        ( 6, 'Passwords', 'Super Secure Password: 123456; Other Secure Password: Password!', NOW(), (SELECT user_id from users where user_id = 2));          
+        INSERT INTO notes(note_id, note_title, note_text, note_timestamp, note_author_id, note_org_id)
+        VALUES( 1, 'Test Note', 'This is a test note', NOW(), (SELECT user_id from users where user_id = 1), (SELECT org_id from org where org_id = 1)), 
+        ( 2, 'Some Random Note', 'lorem', NOW(), (SELECT user_id from users where user_id = 1), (SELECT org_id from org where org_id = 1) ), 
+        ( 3, 'Thoughts about pluralsight', 'Pluralsight videos need some work....', NOW(), (SELECT user_id from users where user_id = 1), (SELECT org_id from org where org_id = 1)), 
+        ( 4, 'THoughts about backend', 'Backend is a beast. Holy wow. I wanna conquer the beast though.', NOW(), (SELECT user_id from users where user_id = 2), (SELECT org_id from org where org_id = 1)), 
+        ( 5, 'Meeting', 'This meeting is boring. I wish i were doing something ', NOW(), (SELECT user_id from users where user_id = 2), (SELECT org_id from org where org_id = 1)), 
+        ( 6, 'Passwords', 'Super Secure Password: 123456; Other Secure Password: Password!', NOW(), (SELECT user_id from users where user_id = 2), (SELECT org_id from org where org_id = 1));          
         `
         )
         .then(() => {

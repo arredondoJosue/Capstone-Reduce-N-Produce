@@ -1,14 +1,9 @@
-// import "../styles/BootCustom.scss";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setTasks, setPopoverTask, setPopoverNote } from "../Hooks/userSlice";
-
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import PopoverBody from "react-bootstrap/PopoverBody";
-import PopoverHeader from "react-bootstrap/PopoverHeader";
+import { setTasks } from "../Hooks/userSlice";
+import ClickAwayListener from "react-click-away-listener";
 
 import NewTask from "./NewTask";
 import NewNote from "./NewNote";
@@ -21,53 +16,20 @@ import firebaseConfig from "../Hooks/firebase";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-let useClickOutsideTask = (handler) => {
-  let domNodeTask = useRef();
-
-  useEffect(() => {
-    let maybeHandler = (event) => {
-      if (domNodeTask.current && !!domNodeTask.current.contains(event.target)) {
-        handler();
-      }
-    };
-
-    document.addEventListener("mousedown", maybeHandler);
-
-    return () => {
-      document.removeEventListener("mousedown", maybeHandler);
-    };
-  });
-
-  return domNodeTask;
-};
-
-let useClickOutsideNote = (handler) => {
-  let domNodeNote = useRef();
-
-  useEffect(() => {
-    let maybeHandler = (event) => {
-      if (domNodeNote.current && !!domNodeNote.current.contains(event.target)) {
-        handler();
-      }
-    };
-
-    document.addEventListener("mousedown", maybeHandler);
-
-    return () => {
-      document.removeEventListener("mousedown", maybeHandler);
-    };
-  });
-
-  return domNodeNote;
-};
-
 export default function Navbar() {
   const [actionItem, setActionItem] = useState(false);
   const [showTask, setShowTask] = useState(false);
   const [showNote, setShowNote] = useState(false);
+  const [show, setShow] = useState(true);
+  // console.log("outside", show);
 
-  const popTaskToggle = useSelector((state) => state.globalStore.popoverTask);
-  const popNoteToggle = useSelector((state) => state.globalStore.popoverNote);
+  const handleClose = () => {
+    // console.log("inside", show);
+    show ? setShow(false) : null;
+    showNote ? setShowNote(false) : null;
+    showTask ? setShowTask(false) : null;
+  };
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -79,118 +41,79 @@ export default function Navbar() {
     textDecoration: "none",
   };
 
-  const popoverContainer = {
-    postition: "absolute !important",
-    top: "-65px !important",
-    left: "55px !important",
-    right: "auto !important",
-    bottom: "65px !important",
-    transform: "translate3d(5px, 64.5px, 0px) !important",
-    maxHeight: "100vh !important",
-  };
-
-  let domNode = useClickOutsideTask(() => setShowTask(false));
-  let domNodeNote = useClickOutsideNote(() => setShowNote(false));
-
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
-
-  // const handleClickOutside = (e) => {
-  //   if (actionItem && !actionItem.contains(e.target)) {
-  //     setActionItem(false);
-  //   } else if (actionItem && actionItem.contains(e.target)) {
-  //     setActionItem(actionItem);
-  //   }
+  // const popoverContainer = {
+  //   postition: "absolute !important",
+  //   top: "-65px !important",
+  //   left: "55px !important",
+  //   right: "auto !important",
+  //   bottom: "65px !important",
+  //   transform: "translate3d(5px, 64.5px, 0px) !important",
+  //   maxHeight: "100vh !important",
   // };
 
-  // const popover = (
-  //   <Popover id="popover-basic">
-  //     <PopoverHeader as="h3">Add New Task</PopoverHeader>
-  //     <PopoverBody>
-  //       <NewTask handleShow={handleShow} />
-  //     </PopoverBody>
-  //   </Popover>
-  // );
-
-  // const popoverNote = (
-  //   <Popover id="popover-basic">
-  //     <PopoverHeader as="h3">Add New Note</PopoverHeader>
-  //     <PopoverBody>
-  //       <NewNote />
-  //     </PopoverBody>
-  //   </Popover>
-  // );
   const popoverNote = (
-    <div ref={domNodeNote} id="pop-click">
-      <div id="popover-basic">
-        <h3 className="popover-header">Add New Note</h3>
-        <div className="popover-body">
-          <NewNote />
+    <ClickAwayListener onClickAway={handleClose}>
+      <div>
+        <div id="popover-basic">
+          <h3 className="popover-header">Add New Note</h3>
+          <div className="popover-body">
+            <NewNote handleClose={handleClose} />
+          </div>
         </div>
       </div>
-    </div>
+    </ClickAwayListener>
   );
 
   const popover = (
-    <div ref={domNode} id="pop-click">
-      <div id="popover-basic">
-        <h3 className="popover-header">Add New Task</h3>
-        <div className="popover-body">
-          <NewTask />
+    <ClickAwayListener onClickAway={handleClose}>
+      <div>
+        <div id="popover-basic">
+          <h3 className="popover-header">Add New Task</h3>
+          <div className="popover-body">
+            <NewTask handleClose={handleClose} />
+          </div>
         </div>
       </div>
-    </div>
+    </ClickAwayListener>
   );
+
+  const handleClickTask = () => {
+    // show === null ? setShow(false) : setShow(true);
+    show ? null : setShow(!show);
+    setShowTask(!showTask);
+    showNote ? setShowNote(false) : null;
+  };
+
+  const handleClickNote = () => {
+    // show === null ? setShow(false) : setShow(true);
+    show ? setShow(!show) : null;
+    showTask ? setShowTask(false) : null;
+    showNote ? setShowNote(false) : setShowNote(true);
+  };
 
   return (
     <>
       <nav className="navbar action-items">
         <ul className="nav-list">
           <li className="navbar-li-items">
-            {/* <OverlayTrigger
-              rootClose
-              trigger="click"
-              placement="auto"
-              overlay={popover}
-              defaultShow={false}
-            >
-              <span className="material-icons action addTask" style={iconStyle}>
-                add_task
-              </span>
-            </OverlayTrigger> */}
-            {showTask ? popover : null}
+            {show ? (showTask ? popover : null) : null}
             <span
               className="material-icons action addTask"
               style={iconStyle}
-              onClick={() => setShowTask((show) => !show)}
+              onClick={handleClickTask}
             >
               add_task
             </span>
           </li>
           <li className="navbar-li-items">
-            {showNote ? popoverNote : null}
+            {show ? null : showNote ? popoverNote : null}
             <span
               className="material-icons action"
               style={iconStyle}
-              onClick={() => setShowNote((show) => !show)}
+              onClick={handleClickNote}
             >
               note_add
             </span>
-
-            {/* <OverlayTrigger
-              rootClose
-              trigger="click"
-              placement="auto"
-              overlay={popoverNote}
-            >
-              <span className="material-icons action" style={iconStyle}>
-                note_add
-              </span>
-            </OverlayTrigger> */}
           </li>
           <li className="navbar-li-items">
             <span className="material-icons action" style={iconStyle}>

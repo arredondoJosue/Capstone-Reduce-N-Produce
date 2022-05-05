@@ -4,23 +4,15 @@ import axios from "axios";
 import "../styles/NewTask.scss";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setTasks, setPopoverTask } from "../Hooks/userSlice";
+import { setTasks } from "../Hooks/userSlice";
 
-export default function NewTask() {
+export default function NewTask({ handleClose }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.globalStore.userInfo);
   const users = useSelector((state) => state.globalStore.allUsers);
-  const popToggle = useSelector((state) => state.globalStore.popoverTask);
+  const defaultDate = new Date(Date() + 1).toISOString().split("T")[0];
 
-  const defaultDate = new Date(Date() + 1);
-  const formattedDate =
-    defaultDate.getFullYear() +
-    "-" +
-    (defaultDate.getMonth() + 1) +
-    "-" +
-    defaultDate.getDate();
-  console.log(users);
-
+  console.log(typeof defaultDate);
   let x = user.user_id;
   return (
     <div className="new-task">
@@ -32,7 +24,7 @@ export default function NewTask() {
         <Formik
           initialValues={{
             description: "", // task_description
-            dueDate: { formattedDate }, // task_due
+            dueDate: defaultDate, // task_due
             priority: "", // task_priority
             user_id: x, // task_author_id INT
             status: "", // task_status
@@ -40,19 +32,18 @@ export default function NewTask() {
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              // alert(JSON.stringify(values, null, 2));
 
-              console.log(typeof values.dueDate);
               axios
-                .post("http://localhost:5000/api/v1/tasks/new-task", values)
+                .post(`http://localhost:5000/api/v1/tasks/new-task`, values)
                 .then((res) => {
                   console.log("RESPONSE AFTER TASKS POST: ", res);
                   values.description = "";
-                  values.dueDate = { formattedDate };
+                  values.dueDate = "";
                   values.priority = "";
                   values.status = "";
                   values.assignedTo = "";
-                  dispatch(setPopoverTask(!popToggle));
+                  handleClose();
                   // dispatch(setTasks(res.data)); // set tasks to the response data from the server
                 })
                 .then(() => {
@@ -75,16 +66,17 @@ export default function NewTask() {
               <div className="new-task-form">
                 <div className="new-task-form-section-top">
                   <div className="new-task-form-field">
-                    <label
+                    {/* <label
                       className="new-task-form-field-label"
                       htmlFor="description"
                     >
                       Description
-                    </label>
+                    </label> */}
                     <Field
                       className="new-task-form-description"
                       type="text"
                       name="description"
+                      placeholder="Your task description here..."
                     />
                   </div>
                 </div>
@@ -152,20 +144,22 @@ export default function NewTask() {
                       name="assignedTo"
                       placeholder="Select Assignee"
                     >
-                      {/* <option value="">Select</option> */}
-                      {/* <option value={1}>John Doe</option>
-                      <option value={2}>Jane Doe</option>
-                      <option value={3}>Joe Doe</option> */}
                       {users.map((user) => {
                         return (
-                          <option value={user.user_id}>{user.user_name}</option>
+                          <option key={user.user_id} value={user.user_id}>
+                            {user.user_name}
+                          </option>
                         );
                       })}
                     </Field>
                   </div>
                 </div>
               </div>
-              <button type="submit" disabled={isSubmitting}>
+              <button
+                className="new-task-button"
+                type="submit"
+                disabled={isSubmitting}
+              >
                 Submit
               </button>
             </Form>
@@ -175,45 +169,3 @@ export default function NewTask() {
     </div>
   );
 }
-//         <div>
-//           <label>
-//             Task Description:
-//             <input
-//               className="new-task-input"
-//               type="text"
-//               name="taskDescription"
-//             />
-//           </label>
-//           <label>
-//             Due Date:
-//             <input
-//               className="new-task-input"
-//               type="date"
-//               name="taskDue"
-//               defaultValue={new Date(Date.now() + 1)}
-//             />
-//           </label>
-//           <label>
-//             Priority:
-//             <select className="new-task-input" name="taskPriority">
-//               <option value="1">1</option>
-//               <option value="2">2</option>
-//               <option value="3">3</option>
-//               <option value="4">4</option>
-//               <option value="5">5</option>
-//             </select>
-//             Assigned to(optional):
-//             <select className="new-task-input" name="taskAssignee">
-//               <option value="1">1</option>
-//               <option value="2">2</option>
-//               <option value="3">3</option>
-//               <option value="4">4</option>
-//               <option value="5">5</option>
-//             </select>
-//           </label>
-//           <input className="new-task-button" type="submit" value="Submit" />
-//         </Formik>
-//       </div>
-//     </div>
-//   );
-// }

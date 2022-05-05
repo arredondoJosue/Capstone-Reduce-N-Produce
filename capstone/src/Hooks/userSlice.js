@@ -6,7 +6,7 @@ const initialState = {
   allUsers: [],
   tasks: [],
   notes: [],
-  agenda: "",
+  agenda: [],
   callings: [],
   popoverTask: false,
   popoverNote: false,
@@ -32,10 +32,10 @@ export const userSlice = createSlice({
     },
     setNotes: (state, action) => {
       state.notes.push(action.payload);
-      console.log(state.notes);
     },
     setAgenda: (state, action) => {
       state.agenda = action.payload;
+      console.log("HIT AGENDA SLICE: ", state.agenda);
     },
     setCallings: (state, action) => {
       state.callings.push(action.payload);

@@ -7,7 +7,7 @@ import { setNotes, setPopoverNote } from "../Hooks/userSlice";
 import axios from "axios";
 import "../styles/NewNote.scss";
 
-export default function NewNote({ handleShow }) {
+export default function NewNote({ handleClose }) {
   const userInfo = useSelector((state) => state.globalStore.userInfo);
   const dispatch = useDispatch();
 
@@ -40,12 +40,15 @@ export default function NewNote({ handleShow }) {
                   values.noteText = "";
                   values.sharedWith = "";
                   dispatch(setNotes(res.data)); // set tasks to the response data from the server
+                  handleClose();
                 })
                 .then(() => {
                   axios
-                    .get(`http://localhost:5000/api/v1/notes`)
+                    .get(
+                      `http://localhost:5000/api/v1/notes/${userInfo.user_id}`
+                    )
                     .then((res) => {
-                      // dispatch(setNotes(res.data)); // set tasks to the response data from the server
+                      dispatch(setNotes(res.data)); // set tasks to the response data from the server
                       console.log("hit the notes get route");
                     })
                     .catch((err) => {
@@ -65,16 +68,17 @@ export default function NewNote({ handleShow }) {
               <div className="new-note-form">
                 <div className="new-note-form-section-top">
                   <div className="new-note-form-field">
-                    <label
+                    {/* <label
                       className="new-note-form-field-label"
                       htmlFor="noteTitle"
                     >
                       Title
-                    </label>
+                    </label> */}
                     <Field
                       className="new-note-form-title"
                       type="text"
                       name="noteTitle"
+                      placeholder="Title"
                     />
                   </div>
                 </div>
@@ -82,16 +86,17 @@ export default function NewNote({ handleShow }) {
                 <div className="new-note-form-section-bottom">
                   <div className="new-note-form-section-top">
                     <div className="new-note-form-field">
-                      <label
+                      {/* <label
                         className="new-note-form-field-label"
                         htmlFor="noteText"
                       >
                         Description
-                      </label>
+                      </label> */}
                       <Field
                         className="new-note-form-description"
                         as="textarea"
                         name="noteText"
+                        placeholder="Your note here..."
                       />
                     </div>
                   </div>

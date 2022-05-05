@@ -5,7 +5,7 @@ $secondary-color-darker: #343142a8;
 $third-color: #a97c73b8; //highlight color 1
 $fourth-color: #eeeff6; //highlight color 2
 $fourth-color-darker: #eeeff693; //highlight color 2
-$fifth-color: #7754b2; //highlight color 3 #A288E3
+$fifth-color: rgba(115, 173, 215, 0.237); //#7754b2; //highlight color 3 #A288E3
 $primary-font: 'Archivo', sans-serif;
 $inactive-icon: rgba(255, 255, 255, 0.3);
 // HORIZONTAL background:-webkit-linear-gradient(0deg, #7754B2 0%, #343142 27%, #1D1B2E 86%);
@@ -98,6 +98,20 @@ $inactive-icon: rgba(255, 255, 255, 0.3);
     display: flex;
     cursor: pointer;
     text-decoration: none;
+
+    
+  }
+
+  .material-symbols-outlined{
+    color: $fourth-color;
+    display: flex;
+    cursor: pointer;
+
+    font-variation-settings:
+  'FILL' 0,
+  'wght' 100,
+  'GRAD' -25,
+  'opsz' 20
   }
 
   .action:hover{
