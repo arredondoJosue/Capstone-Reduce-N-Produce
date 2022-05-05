@@ -84,13 +84,13 @@ export default function Approval() {
 
   return (
     <>
-      {state ? (
-        <>
-          <div className="new">
-            <h3>New(#)</h3>
-            <div className="kanban-container">
-              {state ? newSubs : <h1>Loading...</h1>}
-              {/* <KanbanCard
+      {/* {state ? (
+        <> */}
+      <div className="new">
+        <h3>New</h3>
+        <div className="kanban-container">
+          {state ? newSubs : <h1>Loading...</h1>}
+          {/* <KanbanCard
             key={approval[0].proposed_id}
             callingName={approval[0].proposed_calling}
             name={approval[0].proposed_name}
@@ -99,7 +99,7 @@ export default function Approval() {
             phase={approval[0].proposed_phase}
             status={approval[0].proposed_status}
           /> */}
-              {/* <KanbanCard />
+          {/* <KanbanCard />
           <KanbanCard />
           <KanbanCard />
           <KanbanCard />
@@ -108,47 +108,47 @@ export default function Approval() {
           <KanbanCard />
           <KanbanCard />
           <KanbanCard /> */}
-            </div>
-          </div>
-
-          <div className="approved">
-            <h3>Approved(#)</h3>
-            <div className="kanban-container approved">
-              {state ? approvedSubs : <h1>Loading...</h1>}
-              {/* <KanbanCard />
-          <KanbanCard />
-          <KanbanCard />
-          <KanbanCard /> */}
-            </div>
-          </div>
-
-          <div className="denied">
-            <h3>Denied(#)</h3>
-            <div className="kanban-container rejected">
-              {state ? deniedSubs : <h1>Loading...</h1>}
-              {/* <KanbanCard />
-          <KanbanCard />
-          <KanbanCard />
-          <KanbanCard />
-          <KanbanCard />
-          <KanbanCard /> */}
-            </div>
-          </div>
-
-          <div className="pending">
-            <h3>Pending(#)</h3>
-            <div className="kanban-container pending">
-              {state ? pendingSubs : <h1>Loading...</h1>}
-              {/* <KanbanCard />
-          <KanbanCard /> */}
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="callings">
-          <LoadingIcon />
         </div>
-      )}
+      </div>
+
+      <div className="approved">
+        <h3>Approved</h3>
+        <div className="kanban-container approved">
+          {state ? approvedSubs : <h1>Loading...</h1>}
+          {/* <KanbanCard />
+          <KanbanCard />
+          <KanbanCard />
+          <KanbanCard /> */}
+        </div>
+      </div>
+
+      <div className="denied">
+        <h3>Denied</h3>
+        <div className="kanban-container rejected">
+          {state ? deniedSubs : <h1>Loading...</h1>}
+          {/* <KanbanCard />
+          <KanbanCard />
+          <KanbanCard />
+          <KanbanCard />
+          <KanbanCard />
+          <KanbanCard /> */}
+        </div>
+      </div>
+
+      <div className="pending">
+        <h3>Pending</h3>
+        <div className="kanban-container pending">
+          {state ? pendingSubs : <h1>Loading...</h1>}
+          {/* <KanbanCard />
+          <KanbanCard /> */}
+        </div>
+      </div>
     </>
+    // ) : (
+    //   <div className="callings-loading">
+    //     <LoadingIcon />
+    //   </div>
+    // )}
+    // </>
   );
 }

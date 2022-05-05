@@ -52,19 +52,33 @@
         margin-block-end: 5px;
 
         .agenda-buttons{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            margin-right: 10px;
-            cursor: pointer;  
-            text-decoration: none;
+            // display: flex;
+            // flex-direction: row;
+            // justify-content: space-between;
+            // align-items: center;
+            // margin-right: 10px;
+            // cursor: pointer;  
+            // text-decoration: none;
+            // color: App.$fourth-color;
+            // font-size: 1.5rem;
+            // font-family: App.$primary-font, sans-serif;
+            // background-color: App.$fifth-color;
+            // border: .5px solid App.$fourth-color;
+            // border-radius: 5px;   
+            flex: 1 1 10%;
+            // min-width: 5ch;
+            cursor: pointer;
+            background-color: App.$primary-color;
+            border: none;
             color: App.$fourth-color;
             font-size: 1.5rem;
-            font-family: App.$primary-font, sans-serif;
-            background-color: App.$fifth-color;
-            border: .5px solid App.$fourth-color;
-            border-radius: 5px;        
+            font-family: inherit;
+            // margin-bottom: 5px;
+        
+            &:hover{
+                background-color: App.$secondary-color;
+                border-radius: 5px;
+            }     
         }
 
     }
@@ -382,7 +396,7 @@
         }
 
         // .task-checkbox:before{
-        //       content: "\f00c";
+        //     //   content: "\f00c";
         //         // font-family: FontAwesome;
         //         font-size: 1.5rem;
         //         color: App.$fourth-color;
@@ -403,7 +417,10 @@
             // background-color: App.$secondary-color;
             background-color: App.$fifth-color;
             border-radius: 50%;
+            color: App.$fourth-color;
         }
+
+        // Bug: when checkbox is checked, it passes checkbox value to the next input
         input[type=checkbox]:checked{
             content:"\2713";
             font-size: 1.5rem;
@@ -411,7 +428,7 @@
             // text-align: center;
             line-height: 1.5rem;
             // background-color: App.$secondary-color;
-            background-color: App.$fifth-color;
+            // background-color: App.$fifth-color;
             border-radius: 50%;
         }
 

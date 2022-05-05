@@ -82,7 +82,7 @@ module.exports = {
   updateTask:
     ("/api/v1/tasks/update/:task_id",
     (req, res) => {
-      const { taskDescription, taskDue } = req.body;
+      const { taskDescription, dueDate } = req.body;
       // const task_due_esc = req.params.due_date;
 
       const task_description_esc = taskDescription.replace(/'/g, "''");
@@ -97,7 +97,7 @@ module.exports = {
       sequelize
         .query(
           `UPDATE tasks
-          SET task_description = '${task_description_esc}', task_due = '${taskDue}'
+          SET task_description = '${task_description_esc}', task_due = '${dueDate}'
           WHERE task_id = ${req.params.task_id}`
         )
         .then((tasks) => {

@@ -13,6 +13,7 @@ export default function EditTask({
   setEditTask,
   handleTaskEdit,
   i,
+  setTasks,
 }) {
   let [taskInput, setTaskInput] = useState("");
   let [taskDueInput, setTaskDueInput] = useState("");
@@ -27,7 +28,6 @@ export default function EditTask({
   }, []);
 
   let x = new Date(taskDue).toISOString().split("T")[0];
-  console.log(typeof x);
 
   function handleSubmit(values) {
     setTimeout(() => {
@@ -38,17 +38,20 @@ export default function EditTask({
           console.log(res.data);
           // setTaskInput("");
           // setTaskDueInput("");
-          setEditTask(false);
-          handleTaskEdit(taskId);
+          // handleTaskEdit(taskId);
         })
-        // .then(() => {
-        //     axios
-        //         .get(`http://localhost:5000/api/v1/tasks/${user.user_id}`)
-        //         .then((res) => {
-        //             dispatch(setTasks(res.data));
-        //             console.log("hit the tasks get route");
-        //         })
-        // })
+        .then(() => {
+          axios
+            .get(`http://localhost:5000/api/v1/tasks/${user.user_id}`)
+            .then((res) => {
+              handleTaskEdit(taskId, res.data);
+              console.log("2nd axios get tasks data: ", res.data);
+              // dispatch(setTasks(res.data));
+              console.log("hit the tasks get route");
+              setEditTask(false);
+              console.log("hit the tasks get route 2");
+            });
+        })
         .catch((err) => {
           console.log(err);
         });
@@ -61,6 +64,7 @@ export default function EditTask({
         <input
           className="task-checkbox"
           type="checkbox"
+          name="taskCompleted"
           onClick={() => {
             handleSubmit({
               taskDescription: taskDescriptionInput,

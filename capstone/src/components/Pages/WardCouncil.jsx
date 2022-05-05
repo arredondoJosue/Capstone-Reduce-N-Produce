@@ -9,7 +9,7 @@ export default function WardCouncil() {
   return (
     <div className="wc">
       <header className="wc-header">
-        <h1>Ward Council</h1>
+        <h1>Department Name Here</h1>
       </header>
       <div className="wc-container">
         <div className="wc-container-top">

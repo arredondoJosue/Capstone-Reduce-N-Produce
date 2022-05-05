@@ -23,9 +23,9 @@ export default function TaskList({
           <input
             className="task-checkbox"
             type="checkbox"
-            defaultChecked={taskisComplete}
+            defaultChecked={false}
             onChange={() => {
-              setTaskCheck(!taskCheck);
+              // setTaskCheck(!taskCheck);
               handleChangeChecked(taskId, taskCheck);
             }}
           />
