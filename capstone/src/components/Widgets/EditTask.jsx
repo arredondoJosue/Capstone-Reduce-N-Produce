@@ -71,11 +71,12 @@ export default function EditTask({
         {({ isSubmitting }) => (
           <Form className="edit-task-form">
             <div className="task-design-checkbox edit-task-form-checkbox">
-              <Field
+              <input
                 className="task-checkbox"
                 type="checkbox"
                 onChange={() => {
-                  console.log("hit edit task");
+                  //   setEditTask(false);
+                  console.log("clicked checkbox");
                 }}
               />
             </div>
@@ -113,7 +114,7 @@ export default function EditTask({
               </div>
             </div>
 
-            <div className="task-design-edit-button">
+            {/* <div className="task-design-edit-button">
               <button
                 className="task-edit-button"
                 type="submit"
@@ -124,7 +125,7 @@ export default function EditTask({
               >
                 Save
               </button>
-            </div>
+            </div> */}
           </Form>
         )}
       </Formik>
