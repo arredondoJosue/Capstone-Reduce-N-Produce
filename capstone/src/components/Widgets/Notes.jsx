@@ -5,6 +5,7 @@ import axios from "axios";
 import "../../styles/Widgets.scss";
 
 import EditNote from "./EditNote";
+import NotesList from "./NotesList";
 
 export default function Notes() {
   let [notes, setNotesComponent] = useState([]);
@@ -15,6 +16,7 @@ export default function Notes() {
   const handleShow = () => setShow(true);
 
   const userInfo = useSelector((state) => state.globalStore.userInfo);
+  const userNotes = useSelector((state) => state.globalStore.userNotes);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -14,6 +14,7 @@ const { getUser, getAllUsers } = require("./controllers/usersController");
 const {
   getUserNotes,
   newNote,
+  updateNote,
   getAgenda,
   updateAgenda,
 } = require("./controllers/notesController");
@@ -50,6 +51,7 @@ app.get(baseURL + "/users", getAllUsers);
 // NOTES
 app.get(baseURL + "/notes/:user_id", getUserNotes);
 app.post(baseURL + "/notes/new-note", newNote);
+app.put(baseURL + "/notes/update/:note_id", updateNote);
 
 // AGENDA
 app.get(baseURL + "/agenda/:agenda_id", getAgenda);

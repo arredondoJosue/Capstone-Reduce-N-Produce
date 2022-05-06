@@ -106,7 +106,7 @@ export default function Callings() {
   return (
     <div className="callings">
       <header className="callings-header">
-        <h1>Callings</h1>
+        <h1>Agent Mountain</h1>
 
         <nav className="callings-nav">
           <select

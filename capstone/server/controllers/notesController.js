@@ -57,6 +57,27 @@ module.exports = {
           res.status(500).send(error);
         });
     }),
+  updateNote:
+    ("/api/v1/notes/update/:note_id",
+    (req, res) => {
+      const { note_title, note_text } = req.body;
+
+      const note_title_esc = note_title.replace(/'/g, "''");
+      const note_text_esc = note_text.replace(/'/g, "''");
+
+      sequelize
+        .query(
+          `UPDATE notes
+          SET note_title = '${note_title_esc}', note_text = '${note_text_esc}'
+          WHERE note_id = ${req.params.note_id}`
+        )
+        .then((notes) => {
+          res.status(200).send(notes[0]);
+        })
+        .catch((error) => {
+          res.status(500).send(error);
+        });
+    }),
   getAgenda:
     ("/api/v1/agenda/:agenda_id",
     (req, res) => {

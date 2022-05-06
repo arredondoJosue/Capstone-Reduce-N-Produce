@@ -18,7 +18,7 @@ export default function EditTask({
   let [taskInput, setTaskInput] = useState("");
   let [taskDueInput, setTaskDueInput] = useState("");
   let [taskDescriptionInput, setTaskDescriptionInput] = useState("");
-  const dispatch = useDispatch();
+
   const user = useSelector((state) => state.globalStore.userInfo);
 
   useEffect(() => {

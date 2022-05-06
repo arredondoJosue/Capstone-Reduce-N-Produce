@@ -31,7 +31,7 @@ export default function NewNote({ handleClose }) {
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              console.log(JSON.stringify(values, null, 2));
               axios
                 .post("http://localhost:5000/api/v1/notes/new-note", values)
                 .then((res) => {
