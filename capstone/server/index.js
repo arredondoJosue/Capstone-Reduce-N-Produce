@@ -10,7 +10,11 @@ const {
   completedTask,
   updateTask,
 } = require("./controllers/tasksController");
-const { getUser, getAllUsers } = require("./controllers/usersController");
+const {
+  createUser,
+  getUser,
+  getAllUsers,
+} = require("./controllers/usersController");
 const {
   getUserNotes,
   newNote,
@@ -45,6 +49,7 @@ app.put(baseURL + "/tasks/completed_task/:user_id", completedTask);
 app.put(baseURL + "/tasks/update/:task_id", updateTask);
 
 // USER
+app.post(baseURL + "/user/register/:uid", createUser);
 app.get(baseURL + "/user/:uid", getUser);
 app.get(baseURL + "/users", getAllUsers);
 

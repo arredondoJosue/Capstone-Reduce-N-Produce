@@ -70,7 +70,11 @@ export default function Tasks() {
   return (
     <div className="org-widget-container">
       <div className="child-widget-container">
-        {notes ? notesList : <h2>No notes to display!</h2>}
+        {notes === [] ? (
+          notesList
+        ) : (
+          <h2 style={{ color: "grey" }}>You have no notes to display</h2>
+        )}
       </div>
     </div>
   );

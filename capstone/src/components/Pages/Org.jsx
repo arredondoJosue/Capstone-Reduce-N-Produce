@@ -10,11 +10,13 @@ export default function Org() {
 
   const orgName = () => {
     if (userInfo.user_org === 1) {
-      return "Developers";
+      return "Bishopric";
     } else if (userInfo.user_org === 2) {
-      return "Project Managers";
+      return "Elder's Quorum";
     } else if (userInfo.user_org === 3) {
-      return "Management";
+      return "Relief Society";
+    } else if (userInfo.user_org === 4) {
+      return "Primary";
     }
   };
 
@@ -37,7 +39,7 @@ export default function Org() {
     // </div>
     <div className="wc">
       <header className="wc-header">
-        <h1>{org} Hub</h1>
+        <h1>{org} Coordination</h1>
       </header>
       <div className="wc-container">
         <div className="wc-container-top">
