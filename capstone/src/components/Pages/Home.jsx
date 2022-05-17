@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Notes from "../Widgets/Notes";
+import NotesCopy from "../Widgets/Notes copy";
 import Tasks from "../Widgets/Tasks";
 import Inbox from "../Widgets/Inbox";
 import { useSelector, useDispatch } from "react-redux";
@@ -66,7 +67,7 @@ export default function Home() {
         </div>
         <div className="wc-container-right">
           <h2>Notes</h2>
-          <Notes />
+          <NotesCopy />
         </div>
       </div>
     </div>

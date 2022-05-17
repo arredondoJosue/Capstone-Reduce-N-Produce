@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Tasks from "../Widgets/Tasks";
 import Notes from "../Widgets/Notes";
+import NotesCopy from "../Widgets/Notes copy";
 import Agenda from "../Widgets/Agenda";
+import AgendaCopy from "../Widgets/AgendaEditor";
 
 export default function Org() {
   const userInfo = useSelector((state) => state.globalStore.userInfo);
@@ -43,7 +45,7 @@ export default function Org() {
       </header>
       <div className="wc-container">
         <div className="wc-container-top">
-          <Agenda />
+          <AgendaCopy />
         </div>
         <div className="wc-container-left">
           <h2>Assignments</h2>
@@ -51,7 +53,7 @@ export default function Org() {
         </div>
         <div className="wc-container-right">
           <h2>Notes</h2>
-          <Notes />
+          <NotesCopy />
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import "./App.scss";
 import "./styles/Register.scss";
 import "./styles/Widgets.scss";
 import "./styles/Callings.scss";
+import "./styles/AgendaEditor.scss";
 
 import Navbar from "./components/Navbar";
 import Home from "./components/Pages/Home";

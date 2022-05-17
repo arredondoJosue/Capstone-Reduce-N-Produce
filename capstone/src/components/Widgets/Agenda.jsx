@@ -60,7 +60,7 @@ export default function Agenda() {
       <h2>Meeting Agenda</h2>
       <textarea
         className="org-agenda-textarea"
-        placeholder={agenda === [] ? agenda : "Type your agenda here..."}
+        placeholder={(agenda = [] ? agenda : "Type your agenda here...")}
         value={agenda}
         disabled={agendaEditState}
         onChange={(e) => {
