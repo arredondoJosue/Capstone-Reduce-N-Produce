@@ -1,6 +1,7 @@
 // import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState, createContext } from "react";
+import LoadingIcon from "../Widgets/LoadingIcon";
 import axios from "axios";
 
 import Approval from "./Callings-comps/Approval";
@@ -105,7 +106,7 @@ export default function Callings() {
   return (
     <div className="callings">
       <header className="callings-header">
-        <h1>Callings</h1>
+        <h1>Agent Mountain</h1>
 
         <nav className="callings-nav">
           <select

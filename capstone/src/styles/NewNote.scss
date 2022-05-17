@@ -21,12 +21,14 @@
     transform: translate3d(5px, 64.5px, 0px) !important; 
     border-radius: 5px;
     border: 1px solid #ccc;
-    background-color: rgb(118, 84, 178);
+    // background-color: rgb(118, 84, 178);
+    // background-color:rgba(115, 173, 215, 0.237);
     // box-shadow: 5px 5px 0px 0px App.$secondary-color-darker;
   }
 
   .popover-header{
-    background-color: #412474;
+    // background-color: #412474;
+    // background-color: rgba(27, 92, 138, 0.949);
     color: App.$fourth-color;
     font-size: calc(10px + 2vmin);
     margin-bottom: 0px;
@@ -42,7 +44,8 @@
   }
   
   .popover-body{
-    background-color: rgb(118, 84, 178);
+    // background-color: rgb(118, 84, 178);
+    background-color:rgba(115, 173, 215, 0.237);
     color: App.$fourth-color;
     // border-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -55,10 +58,15 @@
 
 .new-note{
     // background-color: #f5f5f5;
-    background-color: rgb(118, 84, 178);
+    // background-color: rgb(118, 84, 178);
+    // background-color:rgba(115, 173, 215, 0.237);
+    background-color: App.$primary-color;
+
+
     border-radius: 5px;
     // padding: 10px;
     // margin-bottom: 10px;
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -109,22 +117,37 @@
     .new-note-form-field-label{
         margin-right: 10px;
         color: App.$fourth-color;
+        font-weight: bold;
     }
 
     .new-note-form-title{
         width: 90%;
         resize: none;
         margin-left: 3px;
+        background-color: rgba(204, 204, 204, 0.065);
+        border: none;
+        border-bottom: 2px solid #ccc;
+        // font-family: App.$primary-font;
+        color: App.$fourth-color;
+        font-size: .8rem;
     }
 
     .new-note-form-description{
         width: 90%;
         resize: none;
+        font-family: Arial, Helvetica, sans-serif;
+        // background-color: #ccc;
+        color: App.$fourth-color;
+        background-color: rgba(204, 204, 204, 0.065);
+        border: none;
+        border-bottom: 2px solid #ccc;
+        font-size: 1rem;
     }
 
     .new-note-form-due{
         margin-left: 3px;
         width: 115px;
+
     }
 
     .new-note-form-priority{
@@ -140,6 +163,13 @@
     .new-note-form-shared{
         margin-left: 13px;
         width: 120px;
+        border: none;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.288);
+        background-color: rgba(115, 173, 215, 0);
+        color: aliceblue;
+        font-size: 1.15rem;
+        border-radius: 5px;
+        font-family: inherit;
     }
 
     .new-note-form-field{
@@ -171,31 +201,36 @@
         // margin-bottom: 10px;
         // background-color: #412474;
         // color: #ccc;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin-right: 10px;
-        cursor: pointer;  
-        text-decoration: none;
+        cursor: pointer;
+        background-color: App.$primary-color;
+        border: none;
         color: App.$fourth-color;
-        font-size: 1.5rem;
-        font-family: App.$primary-font, sans-serif;
-        background-color: App.$fifth-color;
-        border: .5px solid App.$fourth-color;
-        border-radius: 5px;  
+        font-size: 1.25rem;
+        font-family: inherit;
+        margin-bottom: 5px;
+    
+        &:hover{
+            background-color: App.$secondary-color;
+            border-radius: 5px;
+        }
     }
 
-    .new-note-button:hover{
-        background-color: #412474;
-    }
+    // .new-note-button:hover{
+    //     // background-color: #412474;
+    // background-color:rgba(115, 173, 215, 0.237);
+
+    // }
 
     .new-note-button:active{
-        background-color: #412474;
+        // background-color: #412474;
+    background-color:rgba(115, 173, 215, 0.237);
+
     }
 
     .new-note-button:focus{
-        background-color: #412474;
+        // background-color: #412474;
+    background-color:rgba(115, 173, 215, 0.237);
+
     }
 
     .new-note-button:disabled{

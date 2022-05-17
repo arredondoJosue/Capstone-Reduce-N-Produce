@@ -8,14 +8,21 @@ const {
   getTasks,
   newTask,
   completedTask,
+  updateTask,
 } = require("./controllers/tasksController");
-const { getUser } = require("./controllers/usersController");
 const {
-  getNotes,
+  createUser,
+  getUser,
+  getAllUsers,
+} = require("./controllers/usersController");
+const {
+  getUserNotes,
   newNote,
+  updateNote,
   getAgenda,
   updateAgenda,
 } = require("./controllers/notesController");
+
 const {
   getProposedCallings,
   getApprovalCallings,
@@ -35,17 +42,27 @@ app.get(baseURL, connect);
 app.get(baseURL + "/test", test);
 app.get(baseURL + "/messages", messages);
 
+// TASK
 app.get(baseURL + "/tasks/:user_id", getTasks);
 app.post(baseURL + "/tasks/new-task", newTask);
 app.put(baseURL + "/tasks/completed_task/:user_id", completedTask);
+app.put(baseURL + "/tasks/update/:task_id", updateTask);
 
-app.get(baseURL + "/user", getUser);
+// USER
+app.post(baseURL + "/user/register/:uid", createUser);
+app.get(baseURL + "/user/:uid", getUser);
+app.get(baseURL + "/users", getAllUsers);
 
-app.get(baseURL + "/notes", getNotes);
+// NOTES
+app.get(baseURL + "/notes/:user_id", getUserNotes);
 app.post(baseURL + "/notes/new-note", newNote);
-app.get(baseURL + "/agenda", getAgenda);
+app.put(baseURL + "/notes/update/:note_id", updateNote);
+
+// AGENDA
+app.get(baseURL + "/agenda/:agenda_id", getAgenda);
 app.post(baseURL + "/agenda-update", updateAgenda);
 
+// CALLING
 app.get(baseURL + "/proposed-callings", getProposedCallings);
 app.get(baseURL + "/proposed-callings/approval", getApprovalCallings);
 app.get(baseURL + "/proposed-callings/contact", getContactCallings);

@@ -2,17 +2,18 @@ import React from "react";
 import { Formik, Field, Form } from "formik";
 import axios from "axios";
 import "../styles/NewTask.scss";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setTasks } from "../Hooks/userSlice";
 
-export default function NewTask() {
-  const defaultDate = new Date(Date() + 1);
-  const formattedDate =
-    defaultDate.getFullYear() +
-    "-" +
-    defaultDate.getMonth() +
-    "-" +
-    defaultDate.getDate(+1);
-  console.log(formattedDate);
+export default function NewTask({ handleClose }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.globalStore.userInfo);
+  const users = useSelector((state) => state.globalStore.allUsers);
+  const defaultDate = new Date(Date() + 1).toISOString().split("T")[0];
 
+  console.log(typeof defaultDate);
+  let x = user.user_id;
   return (
     <div className="new-task">
       {/* <div className="new-task-header">
@@ -23,22 +24,35 @@ export default function NewTask() {
         <Formik
           initialValues={{
             description: "", // task_description
-            dueDate: { defaultDate }, // task_due
+            dueDate: defaultDate, // task_due
             priority: "", // task_priority
+            user_id: x, // task_author_id INT
             status: "", // task_status
-            user_id: 1, // task_author_id INT
             assignedTo: "", // task_assignee_id INT
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              // alert(JSON.stringify(values, null, 2));
+
               axios
-                .post("http://localhost:5000/api/v1/tasks/new-task", values)
+                .post(`http://localhost:5000/api/v1/tasks/new-task`, values)
                 .then((res) => {
-                  console.log(res);
+                  console.log("RESPONSE AFTER TASKS POST: ", res);
+                  values.description = "";
+                  values.dueDate = "";
+                  values.priority = "";
+                  values.status = "";
+                  values.assignedTo = "";
+                  handleClose();
+                  // dispatch(setTasks(res.data)); // set tasks to the response data from the server
                 })
                 .then(() => {
-                  setSubmitting(false);
+                  axios
+                    .get(`http://localhost:5000/api/v1/tasks/${user.user_id}`)
+                    .then((res) => {
+                      console.log("hit the tasks get route with: ", res.data);
+                      dispatch(setTasks(res.data)); // set tasks to the response data from the server
+                    });
                 })
                 .catch((err) => {
                   console.log(err);
@@ -52,16 +66,17 @@ export default function NewTask() {
               <div className="new-task-form">
                 <div className="new-task-form-section-top">
                   <div className="new-task-form-field">
-                    <label
+                    {/* <label
                       className="new-task-form-field-label"
                       htmlFor="description"
                     >
                       Description
-                    </label>
+                    </label> */}
                     <Field
                       className="new-task-form-description"
                       type="text"
                       name="description"
+                      placeholder="Your task description here..."
                     />
                   </div>
                 </div>
@@ -115,6 +130,7 @@ export default function NewTask() {
                       <option value="Completed">Completed</option>
                     </Field>
                   </div>
+
                   <div className="new-task-form-field">
                     <label
                       className="new-task-form-field-label"
@@ -126,16 +142,24 @@ export default function NewTask() {
                       className="new-task-form-assigned"
                       as="select"
                       name="assignedTo"
+                      placeholder="Select Assignee"
                     >
-                      <option value="">Select</option>
-                      <option value={1}>John Doe</option>
-                      <option value={2}>Jane Doe</option>
-                      <option value={3}>Joe Doe</option>
+                      {users.map((user) => {
+                        return (
+                          <option key={user.user_id} value={user.user_id}>
+                            {user.user_name}
+                          </option>
+                        );
+                      })}
                     </Field>
                   </div>
                 </div>
               </div>
-              <button type="submit" disabled={isSubmitting}>
+              <button
+                className="new-task-button"
+                type="submit"
+                disabled={isSubmitting}
+              >
                 Submit
               </button>
             </Form>
@@ -145,45 +169,3 @@ export default function NewTask() {
     </div>
   );
 }
-//         <div>
-//           <label>
-//             Task Description:
-//             <input
-//               className="new-task-input"
-//               type="text"
-//               name="taskDescription"
-//             />
-//           </label>
-//           <label>
-//             Due Date:
-//             <input
-//               className="new-task-input"
-//               type="date"
-//               name="taskDue"
-//               defaultValue={new Date(Date.now() + 1)}
-//             />
-//           </label>
-//           <label>
-//             Priority:
-//             <select className="new-task-input" name="taskPriority">
-//               <option value="1">1</option>
-//               <option value="2">2</option>
-//               <option value="3">3</option>
-//               <option value="4">4</option>
-//               <option value="5">5</option>
-//             </select>
-//             Assigned to(optional):
-//             <select className="new-task-input" name="taskAssignee">
-//               <option value="1">1</option>
-//               <option value="2">2</option>
-//               <option value="3">3</option>
-//               <option value="4">4</option>
-//               <option value="5">5</option>
-//             </select>
-//           </label>
-//           <input className="new-task-button" type="submit" value="Submit" />
-//         </Formik>
-//       </div>
-//     </div>
-//   );
-// }

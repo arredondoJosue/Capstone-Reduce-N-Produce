@@ -87,28 +87,28 @@ export default function Contact() {
   return (
     <>
       <div className="new">
-        <h3>Contacted(#)</h3>
+        <h3>Contacted</h3>
         <div className="kanban-container">
           {state ? contacted : <h1>Loading...</h1>}
         </div>
       </div>
 
       <div className="approved">
-        <h3>Appointment Set(#)</h3>
+        <h3>Appointment Set</h3>
         <div className="kanban-container approved">
           {state ? appointmentSet : <h1>Loading...</h1>}
         </div>
       </div>
 
       <div className="denied">
-        <h3>Calling Accepted(#)</h3>
+        <h3>Calling Accepted</h3>
         <div className="kanban-container rejected">
           {state ? callingAccepted : <h1>Loading...</h1>}
         </div>
       </div>
 
       <div className="pending">
-        <h3>Pending(#)</h3>
+        <h3>Pending</h3>
         <div className="kanban-container pending">
           {state ? pending : <h1>Loading...</h1>}
         </div>

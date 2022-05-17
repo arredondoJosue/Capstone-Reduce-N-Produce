@@ -4,6 +4,7 @@ import Agenda from "../Widgets/Agenda";
 import Tasks from "../Widgets/Tasks";
 import "../../styles/WardCouncil.scss";
 import Notes from "../Widgets/Notes";
+import NotesCopy from "../Widgets/Notes copy";
 
 export default function WardCouncil() {
   return (
@@ -21,7 +22,7 @@ export default function WardCouncil() {
         </div>
         <div className="wc-container-right">
           <h2>Notes</h2>
-          <Notes />
+          <NotesCopy />
         </div>
       </div>
     </div>

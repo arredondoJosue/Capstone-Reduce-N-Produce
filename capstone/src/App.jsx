@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./App.scss";
 import "./styles/Register.scss";
@@ -23,11 +23,6 @@ function App() {
     <div className="App">
       <Navbar />
       <header className="App-header">
-        {/* <Login /> */}
-        {/* <Register /> */}
-        {/* <button onClick={seedData}>Seed</button>
-        <div>{data}</div>
-        <div>{seedData}</div> */}
         <Routes>
           <Route index element={<Login />} />
           <Route path="/home" element={<Home />} />
@@ -38,7 +33,6 @@ function App() {
           <Route path="/ward-council" element={<WardCouncil />} />
           <Route path="/messaging" element={<Messaging />} />
           <Route path="/edit-page" element={<EditPage />} />
-          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/register" element={<Register />} />
           <Route path="/new-task" element={<NewTask />} />
         </Routes>

@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function ProfileInfo() {
   const navigate = useNavigate();
-  let [user, setUser] = useState([]);
-  let [state, setState] = useState(false);
+  // let [user, setUser] = useState([]);
+  let [state, setState] = useState(true);
+  const userInfo = useSelector((state) => state.globalStore.userInfo);
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/v1/user").then((res) => {
-      setUser(res.data[0]);
-      console.log(user[0]);
-      setState(true);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:5000/api/v1/user").then((res) => {
+  //     setUser(res.data[0]);
+  //     console.log(user[0]);
+  //     setState(true);
+  //   });
+  // }, []);
 
   return (
     <>
       <header className="profile-container">
         <div className="profile-container-section1">
           <span className="profile-avatar">
-            {state ? user.user_initials : ""}
+            {state ? userInfo.user_initials : ""}
           </span>
         </div>
         <div className="profile-container-section2">
@@ -28,7 +30,7 @@ export default function ProfileInfo() {
             <span className="profile-name">
               Name:{" "}
               <span className="profile-name-text">
-                {state ? user.user_name : "Loading..."}
+                {state ? userInfo.user_name : "Loading..."}
               </span>
             </span>
           </div>
@@ -36,7 +38,7 @@ export default function ProfileInfo() {
             <span className="profile-name">
               Email:{" "}
               <span className="profile-name-text">
-                {state ? user.user_email : "Loading..."}
+                {state ? userInfo.user_email : "Loading..."}
               </span>
             </span>
           </div>
@@ -50,7 +52,7 @@ export default function ProfileInfo() {
             <span className="profile-name">
               Ward:{" "}
               <span className="profile-name-text">
-                {state ? user.user_ward : "Loading..."}
+                {state ? userInfo.user_ward : "Loading..."}
               </span>
             </span>
           </div>
@@ -58,7 +60,7 @@ export default function ProfileInfo() {
             <span className="profile-name">
               Calling:{" "}
               <span className="profile-name-text">
-                {state ? user.user_calling : "Loading..."}
+                {state ? userInfo.user_calling : "Loading..."}
               </span>
             </span>
           </div>
@@ -66,7 +68,7 @@ export default function ProfileInfo() {
             <span className="profile-name">
               Organization:{" "}
               <span className="profile-name-text">
-                {state ? user.user_org : "Loading..."}
+                {state ? userInfo.user_org : "Loading..."}
               </span>
             </span>
           </div>

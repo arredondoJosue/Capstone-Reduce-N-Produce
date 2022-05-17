@@ -52,19 +52,33 @@
         margin-block-end: 5px;
 
         .agenda-buttons{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            margin-right: 10px;
-            cursor: pointer;  
-            text-decoration: none;
+            // display: flex;
+            // flex-direction: row;
+            // justify-content: space-between;
+            // align-items: center;
+            // margin-right: 10px;
+            // cursor: pointer;  
+            // text-decoration: none;
+            // color: App.$fourth-color;
+            // font-size: 1.5rem;
+            // font-family: App.$primary-font, sans-serif;
+            // background-color: App.$fifth-color;
+            // border: .5px solid App.$fourth-color;
+            // border-radius: 5px;   
+            flex: 1 1 10%;
+            // min-width: 5ch;
+            cursor: pointer;
+            background-color: App.$primary-color;
+            border: none;
             color: App.$fourth-color;
             font-size: 1.5rem;
-            font-family: App.$primary-font, sans-serif;
-            background-color: App.$fifth-color;
-            border: .5px solid App.$fourth-color;
-            border-radius: 5px;        
+            font-family: inherit;
+            // margin-bottom: 5px;
+        
+            &:hover{
+                background-color: App.$secondary-color;
+                border-radius: 5px;
+            }     
         }
 
     }
@@ -118,6 +132,166 @@
     }
 }
 
+.task-design{
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    align-items: center;
+    // border-top: 2px solid rgba(255, 255, 255, 0.288);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.288);
+    border-radius: 0px !important;
+
+    &:hover{
+        background-color: App.$secondary-color-darker;
+        border-radius: 5px !important;
+    }
+
+
+    .task-design-content{
+        display: flex;
+        flex-wrap: wrap;
+        justify-items: center;
+        align-items: center;
+        flex: 1 1 85%;
+        cursor: pointer;
+
+
+        .task-design-description{
+            flex: 1 1 80% ;
+            min-width: 25ch;
+
+
+            .task-design-description-text{
+                font-size: 1.25rem !important;
+                text-align: start;
+            }
+        }
+    
+        .task-design-due{
+            flex: 1 1 20%;
+            min-width: 5ch;
+            color:rgba(218, 218, 218, 0.667);
+            text-align: end;
+
+            &::-webkit-calendar-picker-indicator{
+                filter: invert(1)
+            }
+        }
+    }
+    
+
+    .task-id{
+        display: none;
+    }
+    
+    .task-design-checkbox{
+        flex: 1 1 5%;
+        min-width: 1ch;
+    }
+    
+}
+
+
+
+.task-design-content-edit{
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    align-items: center;
+    flex: 1 1 85%;
+    cursor: auto;
+
+    .task-design-description-edit{
+        flex: 1 1 55% ;
+        min-width: 25ch;
+
+        .task-edit-input{
+            display: flex;
+            flex-wrap: wrap;
+            justify-items: center;
+            align-items:flex-start;
+            
+            background-color: rgba(115, 173, 215, 0.237);
+            color: aliceblue;
+            border: none;
+            border-radius: 5px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.288);
+            font-size: 1.25rem;
+            font-family: inherit;
+            width: -webkit-fill-available;
+            text-overflow: ellipsis;            
+        }
+
+        .task-design-description-text-edit{
+            font-size: 1.25rem !important;
+            text-align: start;
+            border-radius: 5px;
+        }
+    }
+
+
+
+    .task-design-due-edit{
+        flex: 1 1 13%;
+        min-width: 7ch;
+        color:rgba(218, 218, 218, 0.667);
+        text-align: end;
+
+        .task-edit-due-input{
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.288);
+            background-color: rgba(115, 173, 215, 0.237);
+            color: aliceblue;
+            font-size: 1.25rem;
+            border-radius: 5px;
+            font-family: inherit;
+            width: 130px;
+
+            &::-webkit-calendar-picker-indicator{
+                filter: invert(1)
+            }
+        }
+    }
+
+}
+
+.task-edit-button{
+    flex: 1 1 10%;
+    min-width: 5ch;
+    cursor: pointer;
+    background-color: App.$primary-color;
+    border: none;
+    color: App.$fourth-color;
+    font-size: 1.25rem;
+    font-family: inherit;
+    margin-bottom: 5px;
+
+    &:hover{
+        background-color: App.$secondary-color;
+        border-radius: 5px;
+    }
+}
+
+.edit-task-form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    align-items: center;
+    flex: 1 1 90%;
+    cursor: auto;
+
+    .edit-task-form-checkbox{
+        flex: 1 1 10%;
+        min-width: 1ch;
+
+        .edit-task-form-checkbox-input{
+            display: none;
+        }
+    }
+}
+
+
+
 .org-widget-container{
     
     .child-widget-container {
@@ -126,21 +300,22 @@
         flex-direction: column;
         width: 100%;
         // max-width: 500px;
-        max-height: 300px;
+        max-height: 375px;
         max-width: 80%;
         overflow: auto;
         margin: 0 auto;
         // border: 1px solid App.$fourth-color;
         border-radius: 5px;
-        padding: 50px;
-        // background-color: App.$secondary-color;
+        padding: 20px;
+        // background-color: rgba(82, 82, 82, 0.166);
+        align-items: center;
 
-      }
+    }
 
     .child-widget-subcontainer{
         width: 100%;
         // height: 50px;
-        border: 1px solid App.$secondary-color-darker;
+        // border: 1px solid App.$secondary-color-darker;
         border-radius: 5px;
         padding: 10px;
         margin-bottom: 10px;
@@ -148,23 +323,216 @@
         font-size: 16px;
         font-family: App.$primary-font, sans-serif;
         color: App.$fourth-color;
-        background-color: App.$secondary-color;
+        // background-color: App.$secondary-color;
+        // border-bottom: 2px solid rgba(255, 255, 255, 0.288);
         
     
         // flex: 1;
-        // display: flex;
+        display: flex;
+        flex-wrap: wrap;
         // flex-direction: row;
         // justify-content: center;
         // align-items: center;
-        cursor: pointer;
+        // cursor: pointer;
         text-decoration: none;
 
         &:hover{
             background-color: App.$secondary-color-darker;
         }
 
+        .task-id{
+            display: none;
+        }
+
+        // .task-design{
+        //     display: flex;
+        //     flex-wrap: wrap;
+        //     justify-items: center;
+        //     align-items: center;
+            
+        //     .task-id{
+        //         display: none;
+        //     }
+            
+        //     .task-design-checkbox{
+        //         flex:1 1 10%;
+        //         min-width: 15ch;
+        //     }
+            
+        //     .task-design-description{
+        //         flex: 1 1 70%;
+        //         min-width: 25ch;
+        //     }
+
+        //     .task-design-due-date{
+        //         flex: 1 1 20%;
+        //         min-width: 10ch;
+        //     }
+        // }
+        
+
+
+
+        
+        input[type=checkbox] {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            width: 30px;
+            height: 30px;
+            border: 1px solid App.$fourth-color;
+            border-radius: 5px;
+            // background-color: App.$third-color;
+            cursor: pointer;
+            outline: none;
+            margin-right: 10px;
+            margin-top: 10px;
+            color: App.$fourth-color;
+            font-size: 1.5rem;
+            font-family: App.$primary-font, sans-serif;
+            border: .5px solid App.$fourth-color;
+            border-radius: 50%;
+
+        }
+
+        // .task-checkbox:before{
+        //     //   content: "\f00c";
+        //         // font-family: FontAwesome;
+        //         font-size: 1.5rem;
+        //         color: App.$fourth-color;
+        //         background-color: App.$secondary-color;
+        //         border: 1px solid App.$fourth-color;
+        //         border-radius: 50%;
+        //         padding: 5px;
+        //         margin-right: 10px;
+                
+        // }
+
+        input[type=checkbox]:hover{
+            content:"\2713";
+            font-size: 1.5rem;
+            // text-shadow: 1px 1px 1px rgb(250, 250, 250);
+            // text-align: center;
+            line-height: 1.5rem;
+            // background-color: App.$secondary-color;
+            background-color: App.$fifth-color;
+            border-radius: 50%;
+            color: App.$fourth-color;
+        }
+
+        // Bug: when checkbox is checked, it passes checkbox value to the next input
+        input[type=checkbox]:checked{
+            content:"\2713";
+            font-size: 1.5rem;
+            // text-shadow: 1px 1px 1px rgb(250, 250, 250);
+            // text-align: center;
+            line-height: 1.5rem;
+            // background-color: App.$secondary-color;
+            // background-color: App.$fifth-color;
+            border-radius: 50%;
+        }
+
     }
 }
+
+.notes-container{
+    // border: 1px solid App.$fourth-color;
+    background-color: rgba(82, 82, 82, 0.166);
+    max-height: 400px !important;
+    max-width: 100% !important;
+    width: 60% !important;
+    padding: 7px !important;
+    flex: 1 !important;
+    flex-wrap: wrap !important;
+    display: flex !important;
+    flex-direction: inherit !important;
+    justify-content: space-evenly !important;
+    align-content: start !important;
+    white-space: break-spaces;
+
+    .notes-subcontainer{
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+        // justify-content: space-between;
+        // margin: 0 auto;
+        // max-width: 400px;
+        // width: 300px !important;
+        // height: 200px !important;
+        // margin-bottom: 10px;
+        // font-size: .95rem;
+
+        width: 300px;
+        // height: 200px;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: .95rem;
+        font-family: App.$primary-font;
+        color: App.$fourth-color;
+        background-color: App.$secondary-color;
+        flex: 1 1 10em;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+
+        &:hover{
+            background-color: App.$secondary-color-darker;
+        }
+
+        .notes-subcontainer-top{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+            margin-bottom: 10px;
+            width: inherit;
+            height: -webkit-fill-available;
+        }
+
+        .notes-subcontainer-bottom{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+            margin-bottom: 10px;
+
+        }
+
+    
+        .note-id{
+            display: none;
+        }
+    
+        .note-title{
+            width: -webkit-fill-available;
+            height: fit-content;
+            font-size: 1rem;
+            border-bottom: 1px solid #eeeff695;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            background-color: App.$secondary-color-darker;
+            overflow-wrap: break-word;
+        }
+        
+        .note-text{
+            width: -webkit-fill-available;
+            height: 176px;
+            max-height: 300px;
+            font-size: .8rem;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+    }
+}
+
 
 .callings{
     overflow: auto;
@@ -198,56 +566,6 @@
         grid-column: 4 / 5;
     }
 }
-
-// .callings-container{
-//     // display: flex;
-//     // flex-wrap: wrap;
-//     // position: relative;
-//     // margin-bottom: 3%;
-//     // column-count: 3;
-
-//     // * {
-//     //     flex-basis: 100%;
-//     // }
-
-//     // .kanban-container {
-//     //     display: flex;
-//     //     flex-wrap: wrap-reverse;
-//     //     flex-direction: row;
-//     //     justify-content: center;
-//     //     align-items: auto;
-//     //     align-content: start
-//     //   }
-//     //   .kanban-container:after {
-//     //     display: block;
-//     //     content: " placeholder ";
-//     //     margin: 20px;
-//     //     flex: 999 999 auto;
-//     //   }
-//     //   .kanban-card {
-//     //     flex: 0 0 auto;
-//     //     margin: 20px;
-//     //   }
-// //     display: flex;
-// //   flex-wrap: wrap-reverse;
-// //   flex-direction: row;
-// //   justify-content: center;
-// //   align-items: auto;
-// //   align-content: start;
-
-// //   .callings:after {
-// //     display: block;
-// //     content: " placeholder ";
-// //     margin: 20px;
-// //     flex: 999 999 auto;
-// //   }
-
-//     // display: grid;
-//     // grid-template-columns: repeat(auto-fill,minmax(360px, 1fr));
-
-   
-
-// }
 
 .kanban-container {
     // border: 1px solid App.$fourth-color-darker;

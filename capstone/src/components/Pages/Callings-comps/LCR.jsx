@@ -63,14 +63,15 @@ export default function LCR() {
   return (
     <>
       <div className="new">
-        <h3>Need Updated({state ? needUpdatedCount : "..."})</h3>
+        {/* <h3>Need Updated({state ? needUpdatedCount : "..."})</h3> */}
+        <h3>Need Updated</h3>
         <div className="kanban-container">
           {state ? needUpdated : <h1>Loading...</h1>}
         </div>
       </div>
 
       <div className="approved">
-        <h3>Updated in LCR({state ? updateCount : "..."})</h3>
+        <h3>Updated in LCR</h3>
         <div className="kanban-container approved">
           {state ? updated : <h1>Loading...</h1>}
         </div>

@@ -62,14 +62,15 @@ export default function SustainSetApart() {
   return (
     <>
       <div className="new">
-        <h3>Sustained({state ? sustainCount : "..."})</h3>
+        {/* <h3>Sustained({state ? sustainCount : "..."})</h3> */}
+        <h3>Sustained</h3>
         <div className="kanban-container">
           {state ? sustained : <h1>Loading...</h1>}
         </div>
       </div>
 
       <div className="approved">
-        <h3>Set Apart({state ? setApartCount : "..."})</h3>
+        <h3>Set Apart</h3>
         <div className="kanban-container approved">
           {state ? setApart : <h1>Loading...</h1>}
         </div>

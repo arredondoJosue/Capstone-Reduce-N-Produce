@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
@@ -9,7 +10,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 import "../App";
-import Login from "./Login";
+// import Login from "./Login";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -18,6 +19,12 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
+  const [calling, setCalling] = useState("");
+  const [org, setOrg] = useState("");
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const registerUser = (e) => {
@@ -26,22 +33,68 @@ export default function Register() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("Account Created");
-        setUser(userCredential.user.email);
+        console.log(userCredential.user.uid);
+        setUser(userCredential.user.uid);
+
+        axios
+          .post(
+            `http://localhost:5000/api/v1/user/register/${userCredential.user.uid}`,
+            {
+              firstName,
+              lastName,
+              email,
+              calling,
+              org,
+            }
+          )
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            setError(err.message);
+          });
+      })
+      .then(() => {
+        console.log("User Created");
+        setSuccess(
+          "Account Created, you will now be re-directed to the login page."
+        );
         setFirstName("");
         setLastName("");
         setEmail("");
         setPassword("");
         setConfirmPwd("");
-      })
-      .then(() => {
-        navigate("/home");
+        setCalling("");
+        setOrg("");
+        setLoading(true);
+        // setFirstName("");
+        // setLastName("");
+        // setEmail("");
+        // setPassword("");
+        // setConfirmPwd("");
+        // setOrg("");
+        // setCalling("");
+        // setSuccess("Account Created");
+        // setLoading(false);
+        setError("");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+
+        // navigate("/home");
       })
       .catch((error) => {
         console.log(error.message);
+        setError(error.message);
+        setSuccess("");
+        setLoading(false);
       });
   };
 
-  return (
+  return loading ? (
+    <h1>{success}</h1>
+  ) : (
     <div>
       <h1>Create Account</h1>
       <form className="form-container" onSubmit={registerUser}>
@@ -66,6 +119,37 @@ export default function Register() {
               onChange={(e) => setLastName(e.target.value)}
               value={lastName}
             />
+          </label>
+          <br />
+
+          <label>
+            Calling:
+            <select
+              name="calling"
+              onChange={(e) => setCalling(e.target.value)}
+              value={calling}
+            >
+              <option value="">Select</option>
+              <option value={1}>No Calling</option>
+              <option value={2}>President</option>
+              <option value={3}>Counselor</option>
+              <option value={4}>Secretary</option>
+            </select>
+          </label>
+          <label>
+            Organization:
+            <select
+              name="org"
+              placeholder="Organization"
+              onChange={(e) => setOrg(e.target.value)}
+              value={org}
+            >
+              <option value="">Select</option>
+              <option value={1}>Bishopric</option>
+              <option value={2}>Elder's Quorum</option>
+              <option value={3}>Relief Society</option>
+              <option value={4}>Primary</option>
+            </select>
           </label>
           <br />
         </div>

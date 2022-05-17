@@ -15,11 +15,14 @@ const sequelize = new Sequelize(connection, {
 });
 
 module.exports = {
-  getNotes:
-    ("/api/v1/notes",
+  getUserNotes:
+    ("/api/v1/notes/:user_id",
     (req, res) => {
       sequelize
-        .query("SELECT * FROM notes")
+        .query(
+          `SELECT * FROM notes
+        WHERE note_author_id = ${req.params.user_id}`
+        )
         .then((notes) => {
           // console.log(notes[0]);
           res.status(200).send(notes[0]);
@@ -54,16 +57,38 @@ module.exports = {
           res.status(500).send(error);
         });
     }),
+  updateNote:
+    ("/api/v1/notes/update/:note_id",
+    (req, res) => {
+      const { note_title, note_text } = req.body;
+
+      const note_title_esc = note_title.replace(/'/g, "''");
+      const note_text_esc = note_text.replace(/'/g, "''");
+
+      sequelize
+        .query(
+          `UPDATE notes
+          SET note_title = '${note_title_esc}', note_text = '${note_text_esc}'
+          WHERE note_id = ${req.params.note_id}`
+        )
+        .then((notes) => {
+          res.status(200).send(notes[0]);
+        })
+        .catch((error) => {
+          res.status(500).send(error);
+        });
+    }),
   getAgenda:
-    ("/api/v1/agenda",
+    ("/api/v1/agenda/:agenda_id",
     (req, res) => {
       sequelize
         .query(
           `
         SELECT agenda_text FROM agenda
-        WHERE agenda_id = 1`
+        WHERE agenda_org_id = ${req.params.agenda_id}`
         )
         .then((agenda) => {
+          // console.log(agenda[0]);
           res.status(200).send(agenda[0]);
         })
         .catch((error) => {
