@@ -49,11 +49,13 @@ export default function Org() {
         </div>
         <div className="wc-container-left">
           <h2>Assignments</h2>
-          <Tasks />
+          {/* <Tasks /> */}
+          Tasks Load here
         </div>
         <div className="wc-container-right">
           <h2>Notes</h2>
-          <NotesCopy />
+          {/* <NotesCopy /> */}
+          Notes load here
         </div>
       </div>
     </div>

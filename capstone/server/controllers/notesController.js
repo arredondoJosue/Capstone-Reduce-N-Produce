@@ -42,7 +42,7 @@ module.exports = {
       const shared_with_esc =
         sharedWith === "" ? null : sharedWith.replace(/'/g, "''");
 
-      console.log("USER: ", user_id);
+      // console.log("USER: ", user_id);
 
       sequelize
         .query(
@@ -81,6 +81,8 @@ module.exports = {
   getAgenda:
     ("/api/v1/agenda/:agenda_id",
     (req, res) => {
+      // console.log("PARAMS AGENDA ID: ", req.params.agenda_id);
+      // console.log("SOCKET AGENDA ID: ", req.body.agendaId);
       sequelize
         .query(
           `

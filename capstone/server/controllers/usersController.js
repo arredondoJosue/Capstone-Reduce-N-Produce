@@ -43,7 +43,7 @@ module.exports = {
           `
         )
         .then((user) => {
-          console.log(user[0]);
+          // console.log(user[0]);
           res.status(200).send(user[0]);
         })
         .catch((error) => {
@@ -60,7 +60,7 @@ module.exports = {
           WHERE uid = '${req.params.uid}';`
         )
         .then((user) => {
-          console.log(user[0]);
+          // console.log(user[0]);
           res.status(200).send(user[0]);
         })
         .catch((error) => {
@@ -76,7 +76,7 @@ module.exports = {
           `SELECT * FROM users;`
         )
         .then((user) => {
-          console.log(user[0]);
+          // console.log(user[0]);
           res.status(200).send(user[0]);
         })
         .catch((error) => {

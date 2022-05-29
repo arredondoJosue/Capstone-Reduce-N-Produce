@@ -11,12 +11,19 @@ export default function Tasks() {
 
   // Gets all of the current user's tasks
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/v1/notes/${userInfo.user_id}`)
-      .then((res) => {
-        // setTasks((prev) => [...prev, ...res.data]);
-        setNotes(res.data);
-      });
+    if ((notes = [])) {
+      axios
+        .get(`http://localhost:5000/api/v1/notes/${userInfo.user_id}`)
+        .then((res) => {
+          // setTasks((prev) => [...prev, ...res.data]);
+          setNotes(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setNotes(userNotes);
+    }
   }, [userNotes]);
 
   // Marks a task as complete and updates the database

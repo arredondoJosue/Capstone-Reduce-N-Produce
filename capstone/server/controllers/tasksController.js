@@ -61,9 +61,9 @@ module.exports = {
   completedTask:
     ("/api/v1/tasks/completed_task/:user_id",
     (req, res) => {
-      console.log("user_id ", req.params.user_id);
-      console.log("task_id ", req.body.task_id);
-      console.log("isComplete", req.body.isComplete);
+      // console.log("user_id ", req.params.user_id);
+      // console.log("task_id ", req.body.task_id);
+      // console.log("isComplete", req.body.isComplete);
       sequelize
         .query(
           `UPDATE tasks
