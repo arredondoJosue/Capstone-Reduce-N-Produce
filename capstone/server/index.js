@@ -19,6 +19,7 @@ const {
   getUserNotes,
   newNote,
   updateNote,
+  deleteNote,
   getAgenda,
   updateAgenda,
 } = require("./controllers/notesController");
@@ -57,6 +58,7 @@ app.get(baseURL + "/users", getAllUsers);
 app.get(baseURL + "/notes/:user_id", getUserNotes);
 app.post(baseURL + "/notes/new-note", newNote);
 app.put(baseURL + "/notes/update/:note_id", updateNote);
+app.delete(baseURL + "/notes/delete/:note_id", deleteNote);
 
 // AGENDA
 app.get(baseURL + "/agenda/:agenda_id", getAgenda);

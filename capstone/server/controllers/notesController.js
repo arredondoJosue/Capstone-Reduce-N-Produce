@@ -78,6 +78,23 @@ module.exports = {
           res.status(500).send(error);
         });
     }),
+  deleteNote:
+    ("/api/v1/notes/delete/:note_id",
+    (req, res) => {
+      console.log("DELETE NOTE", req.params.note_id);
+
+      sequelize
+        .query(
+          `DELETE FROM notes
+          WHERE note_id = ${req.params.note_id}`
+        )
+        .then((notes) => {
+          res.status(200).send(notes[0]);
+        })
+        .catch((error) => {
+          res.status(500).send(error);
+        });
+    }),
   getAgenda:
     ("/api/v1/agenda/:agenda_id",
     (req, res) => {

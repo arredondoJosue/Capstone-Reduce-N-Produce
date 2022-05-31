@@ -33,7 +33,7 @@ export default function Notes() {
   }
 
   console.log("notes", notes);
-  console.log(notes === []);
+  console.log(notes == []);
 
   let notesList = notes.map((note) => {
     return (
@@ -73,13 +73,11 @@ export default function Notes() {
     <>
       <div className="org-widget-container notes">
         <div className="child-widget-container notes-container">
-          {
-            (notes = [] ? (
-              notesList
-            ) : (
-              <h2 style={{ color: "grey" }}>You have no notes to display</h2>
-            ))
-          }
+          {notes == [] ? (
+            notesList
+          ) : (
+            <h2 style={{ color: "grey" }}>You have no notes to display</h2>
+          )}
           {/* <Collapse in={open}>
           <div id="collapse-notes">
             <EditNote />

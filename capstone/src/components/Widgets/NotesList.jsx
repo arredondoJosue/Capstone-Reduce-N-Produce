@@ -24,6 +24,7 @@ export default function Notes({
   const userInfo = useSelector((state) => state.globalStore.userInfo);
   const dispatch = useDispatch();
 
+  // Gets all notes from the database and sets them to the notes state
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/v1/notes/${userInfo.user_id}`)
@@ -100,6 +101,7 @@ export default function Notes({
               handleChangeChecked={handleChangeChecked}
               handleNoteEdit={handleNoteEdit}
               setShowEdit={setShow}
+              setNotes={setNotes}
             />
           ) : null}
         </div>

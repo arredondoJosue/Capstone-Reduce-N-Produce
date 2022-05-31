@@ -9,7 +9,7 @@ export default function Tasks() {
   const userInfo = useSelector((state) => state.globalStore.userInfo);
   const userNotes = useSelector((state) => state.globalStore.notes);
 
-  // Gets all of the current user's tasks
+  // Gets all of the current user's notes
   useEffect(() => {
     if ((notes = [])) {
       axios

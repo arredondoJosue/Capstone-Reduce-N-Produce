@@ -10,6 +10,7 @@ export default function EditNote({
   handleChangeChecked,
   handleNoteEdit,
   setShowEdit,
+  setNotes,
 }) {
   // const {noteInput, setNoteInput} = useState({
   //   note_title: "",
@@ -53,6 +54,28 @@ export default function EditNote({
     }, 500);
   }
 
+  async function handleDelete(noteId) {
+    await setNotes((prev) => {
+      let newState = prev.filter((note) => note.note_id !== noteId);
+      return newState;
+    });
+
+    await axios
+      .delete(`http://localhost:5000/api/v1/notes/delete/${noteId}`)
+      .then((res) => {
+        console.log("After SQL Delete", res.data);
+        // handleNoteEdit(noteId, res.data);
+        setShowEdit(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleCancel() {
+    setShowEdit(false);
+  }
+
   return (
     <div className="org-widget-container notes">
       <div className="child-widget-container notes-container">
@@ -85,6 +108,24 @@ export default function EditNote({
               }}
             >
               Save
+            </button>
+            <button
+              className="task-edit-button"
+              type="submit"
+              onClick={() => {
+                handleDelete(noteId);
+              }}
+            >
+              Delete
+            </button>
+            <button
+              className="task-edit-button"
+              type="submit"
+              onClick={() => {
+                handleCancel();
+              }}
+            >
+              Close
             </button>
           </div>
         </div>
