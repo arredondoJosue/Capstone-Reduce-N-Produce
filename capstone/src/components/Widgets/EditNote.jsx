@@ -20,11 +20,13 @@ export default function EditNote({
   const [noteInputText, setNoteInputText] = useState("");
   const user = useSelector((state) => state.globalStore.userInfo);
 
+  // Handles the input change
   useEffect(() => {
     setNoteInput(noteTitle);
     setNoteInputText(noteText);
   }, [noteTitle, noteText]);
 
+  // PUT request to update a note
   function handleSubmit(values) {
     setTimeout(() => {
       console.log(JSON.stringify(values, null, 2));
@@ -54,6 +56,7 @@ export default function EditNote({
     }, 500);
   }
 
+  // Handles deleting a note - first removes the Note from state (Array of Notes), then it deletes from the database
   async function handleDelete(noteId) {
     await setNotes((prev) => {
       let newState = prev.filter((note) => note.note_id !== noteId);
@@ -63,8 +66,6 @@ export default function EditNote({
     await axios
       .delete(`http://localhost:5000/api/v1/notes/delete/${noteId}`)
       .then((res) => {
-        console.log("After SQL Delete", res.data);
-        // handleNoteEdit(noteId, res.data);
         setShowEdit(false);
       })
       .catch((err) => {
@@ -72,6 +73,7 @@ export default function EditNote({
       });
   }
 
+  // Close the edit note modal
   function handleCancel() {
     setShowEdit(false);
   }
