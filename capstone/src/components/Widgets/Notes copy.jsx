@@ -66,6 +66,7 @@ export default function Tasks() {
         key={i}
         noteId={note.note_id}
         noteTitle={note.note_title}
+        noteDate={note.note_timestamp}
         noteText={note.note_text}
         handleChangeChecked={handleChangeChecked}
         handleNoteEdit={handleNoteEdit}

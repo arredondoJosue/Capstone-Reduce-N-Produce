@@ -9,6 +9,7 @@ import EditNote from "./EditNote";
 export default function Notes({
   noteId,
   noteTitle,
+  noteDate,
   noteText,
   handleChangeChecked,
   handleNoteEdit,
@@ -23,6 +24,8 @@ export default function Notes({
 
   const userInfo = useSelector((state) => state.globalStore.userInfo);
   const dispatch = useDispatch();
+
+  const noteDateFormatted = new Date(noteDate).toLocaleDateString();
 
   // Gets all notes from the database and sets them to the notes state
   useEffect(() => {
@@ -74,22 +77,40 @@ export default function Notes({
 
   return (
     <>
-      <div className="org-widget-container notes">
-        <div className="child-widget-container notes-container">
-          <div className="child-widget-subcontainer notes-subcontainer">
+      {/* <div className="org-widget-container notes"> */}
+      <div className="notes">
+        {/* <div className="child-widget-container notes-container"> */}
+        <div className="note-design notes-subcontainer-top">
+          {/* <span
+            className="material-symbols-outlined note-checkbox"
+            onClick={() => setShow(!show)}
+          >
+            edit_note
+          </span> */}
+          <div className="note-title">{noteTitle}</div>
+          {/* <div className="child-widget-subcontainer notes-subcontainer"> */}
+          <div
+            className="note-design-content notes-subcontainer-bottom"
+            onClick={() => setShow(!show)}
+          >
             {/* <div className="notes-subcontainer-top"> */}
-            <span
+            {/* <span
               className="material-symbols-outlined"
               onClick={() => setShow(!show)}
             >
               edit_note
-            </span>
+            </span> */}
             <div className="note-id">{noteId}</div>
             <div className="note-id">{noteId}</div>
-            <div className="note-title">{noteTitle}</div>
+            {/* <div className="note-title">{noteTitle}</div> */}
             {/* </div> */}
             {/* <div className="notes-subcontainer-bottom"> */}
-            <div className="note-text">{noteText}</div>
+            <input
+              className="note-text"
+              value={noteDateFormatted + "  " + noteText}
+              disabled
+            />
+            {/* <input className="note-text" value={noteText} disabled /> */}
             {/* </div> */}
           </div>
           {show ? (
