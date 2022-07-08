@@ -28,6 +28,7 @@ module.exports = {
         DROP TABLE IF EXISTS org CASCADE;
         DROP TABLE IF EXISTS notes CASCADE;
         DROP TABLE IF EXISTS proposed_callings CASCADE;
+        DROP TABLE IF EXISTS move_in_out CASCADE;
         
         CREATE TABLE users (
           user_id SERIAL PRIMARY KEY,
@@ -108,6 +109,39 @@ module.exports = {
           proposed_phase varchar(75) DEFAULT 'Approval',
           proposed_status varchar(75) DEFAULT 'New'
         );
+
+        CREATE TABLE move_in_out (
+          move_id SERIAL PRIMARY KEY,
+          move_date timestamp,
+          move_name varchar(100),
+          move_type boolean,
+          move_phone varchar(50),
+          move_text_permission boolean,
+          move_email varchar(120),
+          move_email_permission boolean,
+          move_address varchar(100),
+          move_city varchar(70),
+          move_membership_record varchar(25), 
+          move_prev_ward varchar(75),
+          move_prev_bishop varchar(50),
+          move_birthday date,
+          move_spouse varchar(100),
+          move_family varchar(25),
+          move_languages varchar(75),
+          move_major varchar(75),
+          move_interests varchar(1000),
+          move_bio varchar(5000),
+          move_estimated_stay varchar(50),
+          move_prev_callings varchar(500),
+          move_calling_interest varchar(500),
+          move_new_address varchar(100),
+          move_new_city varchar(70),
+          move_new_state varchar(70),
+          move_new_zip varchar(15),
+          move_new_country varchar(75),
+          move_current_callings varchar(500),
+          move_additional_info varchar(500)
+          );
         
         ALTER TABLE users
         ADD user_calling INT REFERENCES callings(calling_id),
@@ -235,6 +269,9 @@ module.exports = {
         ( 4, 'THoughts about backend', 'Backend is a beast. Holy wow. I wanna conquer the beast though.', NOW(), (SELECT user_id from users where user_id = 2), (SELECT org_id from org where org_id = 1)), 
         ( 5, 'Meeting', 'This meeting is boring. I wish i were doing something ', NOW(), (SELECT user_id from users where user_id = 2), (SELECT org_id from org where org_id = 1)), 
         ( 6, 'Passwords', 'Super Secure Password: 123456; Other Secure Password: Password!', NOW(), (SELECT user_id from users where user_id = 2), (SELECT org_id from org where org_id = 1));          
+
+        INSERT INTO move_in_out(move_id, move_date, move_name, move_type, move_phone, move_text_permission, move_email, move_email_permission, move_address, move_city, move_membership_number, move_prev_ward, move_prev_bishop, move_birthday, move_spouse, move_family, move_languages, move_major, move_interests, move_bio, move_estimated_stay, move_prev_callings, move_calling_interest, move_new_address, move_new_city, move_new_state, move_new_zip, move_new_country, move_current_callings, move_additional_info)
+        VALUES(1, '2018-01-01', 'Ash Ketchum', TRUE, '123-456-7890', TRUE, 'ash@ketchum.com', TRUE, '123 Main St', 'Oakland', '000-000-789', 'Provo YSA Ward', 'Bishop Patterson', '1994-05-05', 'Pikachu Ketchum', 'Toddler', 'English, Spanish', 'Computer Science', 'Basketball, Baseball', 'I am a big fan of Ash Ketchum', '1 year', 'Bishop', 'I will go where you want me to go', '123 Main St', 'Oakland', 'CA', '94612', 'USA', 'Bishop', 'I am a big fan of Ash Ketchum')
         `
         )
         .then(() => {

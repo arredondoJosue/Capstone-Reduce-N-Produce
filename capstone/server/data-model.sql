@@ -162,3 +162,36 @@ CREATE TABLE notes (
   note_author_id INT REFERENCES users(user_id),
   note_shared_with INT REFERENCES users(user_id)
 );
+
+CREATE TABLE move_in_out (
+move_id SERIAL PRIMARY KEY,
+move_date timestamp,
+move_name varchar(100),
+move_type boolean,
+move_phone varchar(50),
+move_text_permission boolean,
+move_email varchar(120),
+move_email_permission boolean,
+move_address varchar(100),
+move_city varchar(70),
+move_membership_record varchar(25), 
+move_prev_ward varchar(75),
+move_prev_bishop varchar(50),
+move_birthday date,
+move_spouse varchar(100),
+move_family varchar(25),
+move_languages varchar(75),
+move_major varchar(75),
+move_interests varchar(1000),
+move_bio varchar(5000),
+move_estimated_stay varchar(50),
+move_prev_callings varchar(500),
+move_calling_interest varchar(500),
+move_new_address varchar(100),
+move_new_city varchar(70),
+move_new_state varchar(70),
+move_new_zip varchar(15),
+move_new_country varchar(75),
+move_current_callings varchar(500),
+move_additional_info varchar(500)
+);
